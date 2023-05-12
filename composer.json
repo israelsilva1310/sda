@@ -1,0 +1,29 @@
+{
+  "name": "israelsilva1310/sda",
+  "description": "Project Of TCC - IFSMG | Inconfidentes",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Israel C A Silva",
+      "email": "israelsilva1310@gmail.com",
+      "homepage": "https://israelcasilva.com.br",
+      "role": "Developer jr."
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "source\\": "source/"
+    },
+    "files": [
+      "support/Config.php"
+    ]
+  },
+  "require": {
+    "php": "^7.4||^8.0",
+    "ext-pdo": "*",
+    "coffeecode/datalayer": ">=1.1.8",
+    "coffeecode/router": ">=1.0.8",
+    "league/plates": ">=3.3.0"
+  }
+}
