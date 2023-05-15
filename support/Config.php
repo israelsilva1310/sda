@@ -32,14 +32,14 @@ const DATA_LAYER_CONFIG = [
 /**
  * PROJECT URLs
  */
-const CONF_URL_BASE = "https://sda.israelcasilva.com.br";
-const CONF_URL_TEST = "localhost/sda";
+const CONF_URL_PROD = "https://sda.israelcasilva.com.br";
+const CONF_URL_TEST = "../sda";
 const CONF_URL_ADMIN = "/admin";
 
 /**
  * SITE
  */
-const CONF_SITE_NAME = "SIDA";
+const CONF_SITE_NAME = "SDA";
 const CONF_SITE_TITLE = "Gerencie a distribuição de aulas melhor";
 const CONF_SITE_DESC = "O SIDA é um gerenciador de aulas simples, poderoso e gratuito. O prazer de tomar um café e ter o controle total de suas distribuição de aulas.";
 const CONF_SITE_LANG = "pt_BR";
@@ -117,3 +117,15 @@ const CONF_MAIL_OPTION_HTML = true;
 const CONF_MAIL_OPTION_AUTH = true;
 const CONF_MAIL_OPTION_SECURE = "tls";
 const CONF_MAIL_OPTION_CHARSET = "utf-8";
+
+/**
+ * @param string|null $uri
+ * @return string
+ */
+function url(string $uri = null): string
+{
+    if ($uri) {
+        return CONF_URL_TEST . "/{$uri}";
+    }
+    return CONF_URL_TEST;
+}

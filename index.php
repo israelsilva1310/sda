@@ -1,36 +1,13 @@
 <?php
 require __DIR__ . "./vendor/autoload.php";
 
-use CoffeeCode\Router\Router;
 
-$router = new Router(CONF_URL_TEST);
+$list = new \source\App\HoursController();
+//$list->index();
+$list->add([
+    'hour_initial' => '07:00',
+    'hour_final' => '07:50',
+    'week' => 'terça-feira',
+    'active' => 1
+]);
 
-/**
- * App
- */
-$router->namespace("Source\Controllers");
-
-/**
- * Web
- * home
- */
-$router->group(null);
-$router->get("/", "WebController:home");
-
-$router->get("/contato", "WebController:contact");
-
-/**
- * ERROS
- */
-$router->group("ooops");
-$router->get("/{errcode}", "WebController:error");
-
-
-/**
- * DISPATCH
- */
-$router->dispatch();
-if ($router->dispatch()) {
-    $router->redirect("/ooops/{$router->error()}");
-}
-var_dump($router);

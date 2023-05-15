@@ -15,6 +15,11 @@ class ComposerStaticInitb3399c1a4680d94d73db06368127fe5e
         array (
             'source\\' => 7,
         ),
+        'M' => 
+        array (
+            'MatthiasMullie\\PathConverter\\' => 29,
+            'MatthiasMullie\\Minify\\' => 22,
+        ),
         'L' => 
         array (
             'League\\Plates\\' => 14,
@@ -30,6 +35,14 @@ class ComposerStaticInitb3399c1a4680d94d73db06368127fe5e
         'source\\' => 
         array (
             0 => __DIR__ . '/../..' . '/source',
+        ),
+        'MatthiasMullie\\PathConverter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/matthiasmullie/path-converter/src',
+        ),
+        'MatthiasMullie\\Minify\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/matthiasmullie/minify/src',
         ),
         'League\\Plates\\' => 
         array (
