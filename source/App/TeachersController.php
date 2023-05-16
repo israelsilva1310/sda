@@ -2,31 +2,40 @@
 
 namespace source\App;
 
+use source\Models\Disponibility;
 use source\Models\Teacher;
 
 class TeachersController
 {
-    private string $first_name;
-
-    public function index()
+    public function index(): void
     {
-        $prof = (new Teacher());
-        $prof->find()->fetch(true);
-        var_dump($prof->data());
+        $prof = (new Teacher())->find()->fetch(true);
+        foreach ($prof as $professor) {
+            var_dump($professor->data);
+        }
 
     }
 
-    public function add(string $firstName, string $lastName, string $email, array $hours): TeachersController
+    public function add(array $data): void
     {
         $prof = (new Teacher());
-        $prof->first_name = $firstName;
-        $prof->last_name = $lastName;
+        $prof->first_name = $data['first_name'];
+        $prof->last_name = $data['last_name'];
+        $prof->email = $data['email'];
+        $profId = $prof->save();
 
-//        if (!$prof->save()) {
-//            $prof->fail()->getMessage();
+        $disp = (new Disponibility());
+        $disp->hour_id = $data['hour_id'];
+        $disp->teacher_id = $data['teacher_id'];
+        // $disp->save();
+
+//        if ($prof->save()) {
+//            echo "Professor adicionado!";
+//        } else {
+//            echo "Professor NÃO adicionado";
 //        }
-        var_dump($prof->data());
-        return $this;
+        var_dump($prof);
+        //return $this;
 
     }
 

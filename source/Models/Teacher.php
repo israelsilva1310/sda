@@ -7,7 +7,25 @@
 
 namespace source\Models;
 
-class Teacher
-{
+use CoffeeCode\DataLayer\DataLayer;
 
+class Teacher extends DataLayer
+{
+    public function __construct()
+    {
+        parent::__construct(
+            "teachers",
+            [
+                "availability_id",
+                "first_name",
+                "last_name",
+                "email",
+            ]
+        );
+    }
+
+    public function disponibilityTeacher()
+    {
+        $disp = true;
+    }
 }

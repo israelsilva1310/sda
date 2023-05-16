@@ -13,6 +13,15 @@ class Hour extends DataLayer
 {
     public function __construct()
     {
-        parent::__construct("hours", ["hour_initial", "hour_final", "week"]);
+        parent::__construct(
+            "hours",
+            [
+                "description",
+                "period",
+                "hour_initial",
+                "hour_final",
+                "week"
+            ]
+        );
     }
 }

@@ -15,15 +15,19 @@ class HoursController
     public function index()
     {
         $hr = (new Hour());
-        $hr = $hr->find("", "", 'active')->fetch(true);
+        $hr = $hr->find()->fetch(true);
         foreach ($hr as $hours) {
-            var_dump($hours->data);
+            if ($hours->active == 1) {
+                var_dump($hours->data());
+            }
         }
     }
 
     public function add(array $data)
     {
         $hr = (new Hour());
+        $hr->period = $data['period'];
+        $hr->description = $data['description'];
         $hr->hour_initial = $data['hour_initial'];
         $hr->hour_final = $data['hour_final'];
         $hr->week = $data['week'];
@@ -54,7 +58,6 @@ class HoursController
         }
         var_dump($hr->data());
     }
-
 
     public function inative(array $data)
     {
