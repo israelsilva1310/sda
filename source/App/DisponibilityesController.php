@@ -25,7 +25,6 @@ class DisponibilityesController
         }
     }
 
-
     public function view($id)
     {
         $disp = (new Disponibility())->findById($id);
@@ -63,5 +62,41 @@ class DisponibilityesController
             echo "vixi, deu erro";
         }
         return;
+    }
+
+    public function inacive(array $data)
+    {
+        $disp = (new Disponibility())->findById($data['id']);
+//        $disp->teacher_id = $disp['teacher_id'];
+//        $disp->hour_id = $data['hour_id'];
+        $disp->active = $data['active'];
+        if ($disp->save()) {
+            echo "Registro:" . $data['id'] . " Inativo";
+            //var_dump($id);
+        }
+        var_dump($disp->data());
+    }
+
+    public function active(array $data)
+    {
+        $disp = (new Disponibility())->findById($data['id']);
+//        $disp->teacher_id = $disp['teacher_id'];
+//        $disp->hour_id = $data['hour_id'];
+        $disp->active = $data['active'];
+        if ($disp->save()) {
+            echo "Registro: " . $data['id'] . " Ativado";
+            //var_dump($id);
+        }
+        var_dump($disp->data());
+    }
+
+    public function delete($id)
+    {
+        $disp = (new Disponibility())->findById($id);
+        $disp->destroy();
+        if ($disp->destroy()) {
+            echo "Registro:" . $id . " excluido";
+            var_dump($id);
+        }
     }
 }

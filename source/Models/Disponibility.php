@@ -16,4 +16,12 @@ class Disponibility extends DataLayer
         parent::__construct("disponibilityes", ["teacher_id", "hour_id"]);
     }
 
+    public function add(Disponibility $disponibility, $teacherId, $hourId): Disponibility
+    {
+        $this->etacher->id = $teacherId;
+        $this->hour->id = $hourId;
+        //$this->save();
+        return $this;
+    }
+
 }

@@ -8,7 +8,11 @@
 namespace source\Models;
 
 use CoffeeCode\DataLayer\DataLayer;
+use source\App\DisponibilityesController;
 
+/**
+ * @property string|null $id
+ */
 class Teacher extends DataLayer
 {
     public function __construct()
@@ -16,7 +20,6 @@ class Teacher extends DataLayer
         parent::__construct(
             "teachers",
             [
-                "availability_id",
                 "first_name",
                 "last_name",
                 "email",
@@ -24,8 +27,8 @@ class Teacher extends DataLayer
         );
     }
 
-    public function disponibilityTeacher()
+    public function dispTeacher()
     {
-        $disp = true;
+        return (new Disponibility())->find("teacher_id = :uid", "uid={$this->id}")->fetch(true);
     }
 }

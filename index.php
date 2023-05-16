@@ -17,7 +17,8 @@ require __DIR__ . "./vendor/autoload.php";
  * Controller Teachers
  */
 $profs = new \source\App\TeachersController();
-//$profs->index();
+$profs->index();
+//$profs->view('3');
 //$disp->
 //$profs->add([
 //        'first_name' => 'Diego',
@@ -33,9 +34,11 @@ $profs = new \source\App\TeachersController();
 /**
  * DisponibilityesController
  */
-$disp = new \source\App\DisponibilityesController();
+//$disp = new \source\App\DisponibilityesController();
 //$disp->index();
 //$disp->add(['teacher_id' => '1', 'hour_id' => '11']);
-$disp->view(1);
-$disp->edit(['id' => '1', 'teacher_id' => 1, 'hour_id' => 12]);
+//$disp->view(1);
+//$disp->edit(['id' => '1', 'teacher_id' => 1, 'hour_id' => 12]);
+//$disp->inacive(['id' => 1, 'active' => '0']);
+//$disp->active(['id' => 1, 'active' => '1']);
 

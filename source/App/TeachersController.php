@@ -7,13 +7,26 @@ use source\Models\Teacher;
 
 class TeachersController
 {
-    public function index(): void
+    public function index()
     {
-        $prof = (new Teacher())->find()->fetch(true);
-        foreach ($prof as $professor) {
-            var_dump($professor->data);
+        $list = (new Teacher())->find()->fetch(true);
+
+        /** @var  $teacher Teacher */
+        foreach ($list as $teacherItem) {
+            var_dump($teacherItem->data());
+            foreach ($teacherItem->dispTeacher() as $disp) {
+                var_dump($disp->data);
+            }
         }
 
+        return;
+    }
+
+    public function view($id)
+    {
+        $prof = (new Teacher())->findById($id);
+
+        // var_dump($prof->data());
     }
 
     public function add(array $data): void
