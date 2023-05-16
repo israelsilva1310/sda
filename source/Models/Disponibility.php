@@ -7,7 +7,7 @@
 
 namespace source\Models;
 
-class Teacher
+class disponibility
 {
 
 }

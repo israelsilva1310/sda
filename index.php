@@ -3,11 +3,8 @@ require __DIR__ . "./vendor/autoload.php";
 
 
 $list = new \source\App\HoursController();
-//$list->index();
-$list->add([
-    'hour_initial' => '07:00',
-    'hour_final' => '07:50',
-    'week' => 'terça-feira',
-    'active' => 1
-]);
+$list->index();
+//$list->edit(['id' => 9, 'hour_initial' => '07:50', 'hour_final' => '08:40', 'week' => 'sexta-feira', 'active' => 1]);
+//$list->inative(['id' => '10', 'active' => 0]);
+//$list->active(['id' => '10', 'active' => 1]);
 

@@ -5,9 +5,9 @@
  *HomePage: israelcasilva.com.br
  **/
 
-namespace source\Models;
+namespace source\App;
 
-class Teacher
+class DisponibilityesController
 {
 
 }
