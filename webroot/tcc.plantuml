@@ -1,0 +1,176 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class addresses {
+   user_id: int unsigned
+   cep: int
+   street: varchar(255)
+   number: varchar(255)
+   complement: varchar(255)
+   district: varchar(255)
+   id: int unsigned
+}
+class courses {
+   teacher_coordinator: varchar(255)
+   acronym  /* Sigla */: varchar(10)
+   name: varchar(50)
+   requisito: varchar(255)
+   carga_horaria: smallint unsigned
+   id: int unsigned
+}
+class disciplines {
+   name: varchar(255)
+   teacher_id: int
+   course_id: int
+   workload  /* carga horaria */: int
+   created: datetime
+   modified: timestamp
+   room_id  /* Numero da sala */: int
+   id: int
+}
+class node2 as "disponibilities  /* Table of disponibilityes in hours */" {
+   active: tinyint(1)
+   teacher_id: int
+   hour_id: int
+   updated_at: timestamp
+   created_at: timestamp
+   07:00: tinyint(1)
+   id: int
+}
+class hours {
+   description: varchar(255)
+   shift_id  /* periodo ou turno das aulas */: varchar(10)
+   hour_initial: time
+   hour_final: time
+   day_week: varchar(20)
+   active: tinyint(1)
+   created_at: datetime
+   updated_at: timestamp
+   id: int
+}
+class periods {
+   period: int
+   bimester: int
+   semester: int
+   year: year
+   created: datetime
+   modified: timestamp
+   id: int
+}
+class roles {
+   description: varchar(100)
+   ativo: tinyint(1)
+   created: datetime
+   modified: timestamp
+   id: int
+}
+class node6 as "rooms  /* Tb de salas */" {
+   location: varchar(255)
+   name: varchar(100)
+   created: timestamp
+   modified: timestamp
+   active: tinyint
+   id: int unsigned
+}
+class sectors {
+   active: tinyint(1)
+   name: varchar(255)
+   created: datetime
+   modified: timestamp
+   id: int
+}
+class node8 as "shifts  /* tabela de turnos e periodos */" {
+   name  /* nome do turno */: varchar(255)
+   sunday  /* domingo */: tinyint(1)
+   monday  /* segunda */: tinyint(1)
+   tuesday  /* Terça */: tinyint(1)
+   wednesday  /* quarta */: tinyint(1)
+   thursday  /* quinta */: tinyint(1)
+   friday  /* sexta */: tinyint(1)
+   saturday  /* sabado */: tinyint(1)
+   amount_lessions  /* Quantidade de aulas */: int
+   created: datetime
+   modified: timestamp
+   id: int
+}
+class teacher_disciplines {
+   id: int
+   teacher_id: int
+   discipline_id: int
+   created: datetime
+   modified: timestamp
+}
+class teacher_disponibilities {
+   teacher_id: int
+   disponibilitie_id: int
+   created: datetime
+   modified: timestamp
+   id: int
+}
+class teachers {
+   qrcode: text
+   hash: varchar(255)
+   first_name: varchar(255)
+   last_name: varchar(255)
+   acronym: varchar(10)
+   user_id: int
+   discipline_id: int
+   email: varchar(255)
+   title  /* titulo da graduação */: varchar(100)
+   phone: varchar(14)
+   active: tinyint(1)
+   created_at: datetime
+   updated_at: timestamp
+   id: int
+}
+class turmas {
+   teacher_id  /* professor cordenador */: int
+   cursos_id: int unsigned
+   sector_id: int
+   period_id: int
+   data_inicio: date
+   data_final: date
+   carga_horaria: smallint unsigned
+   name: varchar(255)
+   acronym  /* sigla da turma */: varchar(10)
+   collor: varchar(20)
+   created: datetime
+   modified: timestamp
+   id: int unsigned
+}
+class users {
+   first_name: varchar(255)
+   last_name: varchar(255)
+   email: varchar(255)
+   role_id: int
+   status  /* registered, confirmed */: varchar(50)
+   password: varchar(255)
+   forget: varchar(255)
+   document: varchar(11)
+   photo: varchar(255)
+   created_at: timestamp
+   updated_at: timestamp
+   level: int
+   id: int unsigned
+}
+
+addresses                -[#595959,plain]-^  users                   : "user_id:id"
+disciplines              -[#595959,plain]-^  node6                   : "room_id:id"
+disciplines              -[#595959,plain]-^  teachers                : "teacher_id:id"
+node2                    -[#595959,plain]-^  hours                   : "hour_id:id"
+node2                    -[#595959,plain]-^  teachers                : "teacher_id:id"
+hours                    -[#595959,plain]-^  node8                   : "shift_id:id"
+teacher_disciplines      -[#595959,plain]-^  disciplines             : "discipline_id:id"
+teacher_disciplines      -[#595959,plain]-^  teachers                : "teacher_id:id"
+teacher_disponibilities  -[#595959,plain]-^  teachers                : "teacher_id:id"
+teachers                 -[#595959,plain]-^  disciplines             : "discipline_id:id"
+teachers                 -[#595959,plain]-^  users                   : "user_id:id"
+turmas                   -[#595959,plain]-^  courses                 : "cursos_id:id"
+turmas                   -[#595959,plain]-^  periods                 : "period_id:id"
+turmas                   -[#595959,plain]-^  sectors                 : "sector_id:id"
+turmas                   -[#595959,plain]-^  teachers                : "teacher_id:id"
+users                    -[#595959,plain]-^  roles                   : "role_id:id"
+@enduml

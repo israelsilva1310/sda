@@ -1,0 +1,154 @@
+
+.contrast,
+.contrast div,
+.contrast header,
+.contrast footer,
+.contrast section,
+.contrast main,
+.contrast aside,
+.contrast article,
+.contrast li,
+.contrast ul  {
+    background: black !important;
+    color: white !important;
+}
+
+.contrast h1,
+.contrast h2,
+.contrast h3,
+.contrast h4,
+.contrast h5,
+.contrast h6,
+.contrast p,
+.contrast label,
+.contrast strong,
+.contrast em,
+.contrast cite,
+.contrast q,
+.contrast i,
+.contrast b,
+.contrast u,
+.contrast span {
+    color: white !important;
+}
+
+.contrast a, .contrast h5{
+    color: yellow !important;
+}
+
+.contrast select,
+.contrast input[type=button],
+.contrast input[type=reset],
+.contrast input[type=submit] {
+    background: black !important;
+    color: yellow !important;
+}
+
+.contrast img.on-contrast-force-gray {
+    filter: grayscale(100%) contrast(120%);
+}
+
+.contrast img.on-contrast-force-white {
+    filter: brightness(0) invert(1);
+}
+
+.contrast input[type=text],
+.contrast input[type=password],
+.contrast input[type=url],
+.contrast input[type=search],
+.contrast input[type=email],
+.contrast input[type=tel],
+.contrast input[type=date],
+.contrast input[type=month],
+.contrast input[type=week],
+.contrast input[type=datetime],
+.contrast input[type=datetime-local],
+.contrast textarea,
+.contrast input[type=number] {
+    background: black !important;
+    border: 1px solid white !important;
+    color: white !important;
+}
+
+body.contrast .header-acessibilidade li span  {
+    color: #3f3f3f !important;
+}
+
+body.contrast .header-icons, body.contrast .header-icons div, body.contrast div.mudacontraste, body.contrast footer.rodape, body.contrast footer.rodape div{
+	background-color: #232323 !important;
+}
+
+body.contrast #menu ul li a{
+	color: yellow !important;
+}
+
+body.contrats #menu ul li a:hover{
+	background: #111 !important;
+}
+
+body.contrast img#logoNormal{
+	display: none !important;
+}
+
+body.contrast img#logoContraste{
+	display: block !important;
+}
+
+body.contrast .card{
+	border-color: #232323 !important;
+}
+
+
+body.contrast .servicos h3, body.contrast .maisNoticias h3 {
+    background: #232323 !important;
+}
+
+body.contrast .servicos .linkServicos {
+    background-color: #333;
+    color: #255572;
+}
+
+body.contrast .servicos .linkServicos:hover{
+	background: #111;
+}
+
+body.contrast .servicos .btn2{
+	background-color: #222 !important;
+}
+
+body.contrast .bg-direitos, body.contrast .bg-direitos div{
+	background-color: #111 !important;
+}
+
+body.contrast .sombra:hover {
+    box-shadow: 0 0 20px 0 rgba(255,255,255,0.4);
+    text-decoration: none;
+}
+
+body.contrast .licitacao li{
+	background-color: #333 !important;
+}
+
+body.contrast .licitacao li:hover{
+	background: #111 !important;
+}
+
+body.contrast .list-group .list2{
+	background-color: #222 !important;
+}
+
+body.contrast .page-link{
+    background-color: #000 !important;
+}
+
+body.contrast .cartaoNoticia a h3{
+    color: yellow !important;
+}
+
+body.contrast div.carousel-caption{
+  background: none !important;
+}
+
+body.contrast div.carousel-caption a, body.contrast div.carousel-caption span{
+  background: black !important;
+}
