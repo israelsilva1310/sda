@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var iterable<\App\Model\Entity\Schedule> $schedules
  */
+
 ?>
 <div class="container">
     <?= $this->Html->link(__('Adcicionar'), ['action' => 'add'], ['class' => 'btn btn-success btn-sm float-right']) ?>

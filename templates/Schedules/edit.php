@@ -6,6 +6,7 @@
  * @var string[]|\Cake\Collection\CollectionInterface $teachers
  * @var string[]|\Cake\Collection\CollectionInterface $disciplines
  */
+//pr($weekGrid);
 ?>
 <div class="row">
     <aside class="column">
@@ -28,8 +29,8 @@
                 <?= $this->Form->control('period') ?>
                 <?= $this->Form->control('teacher_id', ['options' => $teachers, 'empty' => true]) ?>
                 <?= $this->Form->control('discipline_id', ['options' => $disciplines, 'empty' => true]) ?>
-                <?= $this->Form->control('day', ['options' => $weekGrid['day'], 'empty' => true]) ?>
-                <?= $this->Form->control('hour', ['options' => $weekGrid['hour'], 'empty' => true]) ?>
+                <?= $this->Form->control('day', ['options' => $weekGrid['dia'], 'empty' => true]) ?>
+                <?= $this->Form->control('hour', ['options' => $weekGrid['hora'], 'empty' => true]) ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>

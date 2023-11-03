@@ -4,45 +4,48 @@
  * git: https://github.com/israelsilva1310
  * HomePage: https://israelcasilva.com.br
  **/
+//var_dump($schedules->hour);
+//var_dump($horaaulas);
 
 ?>
 <div class="container">
-    <h1> Quadro de Horarios </h1>
-    <div class="container">
+    <div class="card">
 
-        <div class="row">
-            <table class="table table-hover">
-                <thead class="">
+        <h1 class="card-header"> Quadro de Horarios </h1>
 
-                <tr class="text-justify">
-                    <th> Horario</th>
-                    <th> Segunda</th>
-                    <th> Terça</th>
-                    <th> Quarta</th>
-                    <th> Quinta</th>
-                    <th> Sexta</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($schedules as $schedule) { ?>
-                    <?php while ($schedule->hour == '07:00 - 07:50') { ?>
-                        <tr>
+        <table class="table table-hover text-center">
+            <thead>
+            <tr class="">
+                <?php foreach ($diasemanas as $diasemana) { ?>
+                    <th><?php echo $diasemana; ?></th>
+                <?php } ?>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($horaaulas as $horaula) { ?>
+                <tr>
+                    <td><?= $horaula ?></td>
+
+                    <?php foreach ($schedules as $schedule) { ?>
+
+                        <?php if ($horaula == $schedule->hour) { ?>
                             <td>
-                                <?= $schedule->hour ?>
-                            </td>
-                            <td class="text-justify">
-                                <?= $schedule->discipline['name'] ?>
-                                <br>
+                                <?= $schedule->discipline['name'] ?><br>
                                 <?= $schedule->teacher['first_name'] ?>
                             </td>
-                        </tr>
-                        <?php break;
-                    }
-                }
-                ?>
+                        <?php } ?>
+                    <?php } ?>
+                </tr>
+            <?php } ?>
 
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>Total</th>
+            </tr>
+            </tfoot>
+
+        </table>
+
     </div>
 </div>
