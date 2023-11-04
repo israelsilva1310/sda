@@ -13,7 +13,7 @@
 
         <h1 class="card-header"> Quadro de Horarios </h1>
 
-        <table class="table table-hover text-center">
+        <table class="table table-striped-columns text-center">
             <thead>
             <tr class="">
                 <?php foreach ($diasemanas as $diasemana) { ?>
