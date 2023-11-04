@@ -14,6 +14,35 @@ class DashboardController extends AppController
 
     public function index(): void
     {
+        $diasemanas = [
+            'Horario',
+            'Segunda',
+            'Terça',
+            'Quarta',
+            'Quinta',
+            'Sexta',
+        ];
+        $horaaulas = [
+            '1' => '07:00',
+            '2' => '07:50',
+
+            '3' => '09:00',
+            '4' => '09:50',
+            '5' => '10:40',
+
+            '6' => '13:10',
+            '7' => '14:00',
+
+            '8' => '15:20',
+            '9' => '16:10',
+
+            '10' => '19:00',
+            '11' => '19:50',
+
+            '12' => '20:50',
+            '13' => '21:40',
+        ];
+
         $teachers = TableRegistry::getTableLocator()
             ->get('Teachers')
             ->find('list', ['limit' => 200]);
@@ -38,11 +67,6 @@ class DashboardController extends AppController
         $count['course'] = $disciplinas->count();
         $count['room'] = $rooms->count();
         $count['discipline'] = $disciplines->count();
-        $kanban = [
-            'teachers' => $teachers,
-            'rooms' => $rooms,
-            'disciplines' => $disciplines,
-            'hours' => $hours];
 
         $allGrid = [
             'teachers' => array($teacher),
@@ -78,7 +102,7 @@ class DashboardController extends AppController
             ],
         ];
 
-        $this->set(compact(['count', 'teachers', 'allGrid']));
+        $this->set(compact(['count', 'teachers', 'allGrid', 'diasemanas', 'horaaulas']));
     }
 
     /**

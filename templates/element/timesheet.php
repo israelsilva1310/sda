@@ -4,9 +4,6 @@
  * git: https://github.com/israelsilva1310
  * HomePage: https://israelcasilva.com.br
  **/
-//var_dump($schedules->hour);
-//var_dump($horaaulas);
-
 ?>
 <div class="container">
     <div class="card">

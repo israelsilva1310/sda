@@ -1,5 +1,5 @@
 <header class="bg-topo">
-    <nav class="navbar navbar-expand-xxl navbar-dark">
+    <nav class="navbar navbar-expand-xxl navbar-gray">
         <div class="container">
             <?= $this->Html->image("inconfidentes-hor.png", [
                 "alt" => "Inicio",
@@ -20,18 +20,14 @@
                             Cadastros
                         </a>
                         <ul class="dropdown-menu" style="z-index: 10000!important;">
+
                             <li><a class="dropdown-item subtitulo-menu" href="./professores">Professores</a></li>
                             <li><a class="dropdown-item subtitulo-menu" href="./disciplinas">Disciplinas</a></li>
                             <li><a class="dropdown-item subtitulo-menu" href="./usuarios">Usuarios</a></li>
+                            <li><a class="dropdown-item subtitulo-menu" href="./salas">Salas / Laboratorios</a></li>
+                            <li><a class="dropdown-item subtitulo-menu" href="./turmas">Turmas</a></li>
+                            <li><a class="dropdown-item subtitulo-menu" href="./usuarios">Usuarios</a></li>
                         </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-md-3 py-md-4 text-light fw-bold titulo-menu text-uppercase"
-                           href="./professores">Professores</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-md-3 py-md-4 text-light fw-bold titulo-menu text-uppercase"
-                           href="./cursos">Cursos</a>
                     </li>
                     <li>
                         <a class="nav-link px-md-3 py-md-4 text-light fw-bold titulo-menu text-uppercase"
@@ -44,19 +40,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item subtitulo-menu"
-                                   href="./tools" target="_parent"> Ferramentas</a></li>
-                            <li><a class="dropdown-item subtitulo-menu"
-                                   href="./salas" target="_self">Publicações</a></li>
-                            <li><a class="dropdown-item subtitulo-menu" href="https://sapl.ourofino.mg.leg.br/"
-                                   target="_blank">SAPL</a></li>
-                            <li><a class="dropdown-item subtitulo-menu"
-                                   href="/transparencia/3/despesas-com-publicidade">Despesas com Publicidade</a></li>
-                            <li><a class="dropdown-item subtitulo-menu"
-                                   href="/transparencia/6/relatorio-de-gestao-fiscal">Relatório de Gestão Fiscal</a>
-                            </li>
-                            <li><a class="dropdown-item subtitulo-menu"
-                                   href="/transparencia/8/extrato-de-contratos-anterior-a-maio2021">Extrato de Contratos
-                                    - anterior a maio/2021</a></li>
+                                   href="./ferramentas" target="_parent"> Ferramentas</a></li>
                             <li><a class="dropdown-item subtitulo-menu"
                                    href="/transparencia/9/relatorios-procon-anterior-a-maio2021">Relatórios Procon -
                                     anterior a maio/2021</a></li>
@@ -75,7 +59,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link px-md-3 py-md-4 text-light fw-bold titulo-menu text-uppercase"
-                           href="/logout">Sair</a>
+                           href="./logout">Sair</a>
                     </li>
                 </ul>
 

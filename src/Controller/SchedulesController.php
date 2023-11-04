@@ -45,13 +45,6 @@ class SchedulesController extends AppController
         $this->set(compact(['schedules', 'horaaulas', 'diasemanas']));
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Schedule id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $schedule = $this->Schedules->get($id, [
@@ -61,11 +54,6 @@ class SchedulesController extends AppController
         $this->set(compact('schedule'));
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $schedule = $this->Schedules->newEmptyEntity();
@@ -107,6 +95,7 @@ class SchedulesController extends AppController
                 '21:40' => '21:40 - 22:30',
             ],
         ];
+
         $courses = $this->Schedules->Courses->find('list', ['limit' => 200])->all();
         $teachers = $this->Schedules->Teachers->find('list', ['limit' => 200])->all();
         $disciplines = $this->Schedules->Disciplines->find('list', ['limit' => 200])->all();

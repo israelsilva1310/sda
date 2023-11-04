@@ -123,7 +123,6 @@
                             <th><?= __('Pediod Id') ?></th>
                             <th><?= __('Updated At') ?></th>
                             <th><?= __('Created At') ?></th>
-                            <th><?= __('07:00') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($teacher->disponibilities as $disponibilities) : ?>
@@ -135,7 +134,7 @@
                             <td><?= h($disponibilities->pediod_id) ?></td>
                             <td><?= h($disponibilities->updated_at) ?></td>
                             <td><?= h($disponibilities->created_at) ?></td>
-                            <td><?= h($disponibilities->07:00) ?></td>
+
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Disponibilities', 'action' => 'view', $disponibilities->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Disponibilities', 'action' => 'edit', $disponibilities->id]) ?>

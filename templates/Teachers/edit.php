@@ -5,41 +5,37 @@
  * @var string[]|\Cake\Collection\CollectionInterface $disciplines
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $teacher->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $teacher->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Teachers'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="teachers form content">
+<div class="container">
+    <div class="card card-primary">
+        <div class="card-header">
+            <legend><?= __('Editar Professor') ?></legend>
             <?= $this->Form->create($teacher) ?>
-            <fieldset>
-                <legend><?= __('Edit Teacher') ?></legend>
-                <?php
-                    echo $this->Form->control('qrcode');
-                    echo $this->Form->control('hash');
-                    echo $this->Form->control('first_name');
-                    echo $this->Form->control('last_name');
-                    echo $this->Form->control('acronym');
-                    echo $this->Form->control('user_id');
-                    echo $this->Form->control('discipline_id', ['options' => $disciplines, 'empty' => true]);
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('title');
-                    echo $this->Form->control('phone');
-                    echo $this->Form->control('active');
-                    echo $this->Form->control('created_at', ['empty' => true]);
-                    echo $this->Form->control('updated_at');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
         </div>
+        <div class="card-body">
+            <?= $this->Form->control('first_name') ?>
+            <?= $this->Form->control('last_name') ?>
+            <?= $this->Form->control('acronym') ?>
+            <?= $this->Form->control('user_id') ?>
+            <?= $this->Form->control('discipline_id', ['options' => $disciplines, 'empty' => true]) ?>
+            <?= $this->Form->control('email') ?>
+            <?= $this->Form->control('title') ?>
+            <?= $this->Form->control('phone') ?>
+            <?= $this->Form->control('active') ?>
+        </div>
+        <div class="card-footer">
+            <h4 class="heading"><?= __('Ações') ?></h4>
+            <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-success btn-sm']) ?>
+            <?= $this->Html->link(__('Cancelar'), [
+                'action' => 'index'], [
+                'class' => ' btn btn-danger btn-sm side-nav-item']) ?>
+            <?= $this->Form->postLink(
+                __('Excluir'),
+                [
+                    'action' => 'delete', $teacher->id],
+                [
+                    'confirm' => __('Deseja realmente excluir o registro # {0}?', $teacher->id),
+                    'class' => 'btn btn-dark btn-sm side-nav-item float-right']
+            ) ?>
+        </div>
+        <?= $this->Form->end() ?>
     </div>
-</div>

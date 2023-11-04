@@ -6,12 +6,7 @@
                 <div class="col-sm-6">
                     <h1 class="m-0">Dashboard</h1>
                 </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Home</li>
-                    </ol>
-                </div><!-- /.col -->
+
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
@@ -49,16 +44,16 @@
     <div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="card text-white bg-info mb-3">
-                <div class="card-header">
-                    <h3><?php echo $count['teacher'] ?></h3>
+            <div class="small-box bg-dark">
+                <div class="inner">
+                    <h3><?= $count['teacher'] ?><sup style="font-size: 20px"></sup></h3>
 
                     <p>Professores</p>
                 </div>
                 <div class="icon">
-                    <i class="fa fa-graduation-cap"></i>
+                    <i class="fa fa-university"></i>
                 </div>
-                <a href="#" class="card-body">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="./professores" class="small-box-footer">Mais info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -73,7 +68,7 @@
                 <div class="icon">
                     <i class="fa fa-id-card"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="./disciplinas" class="small-box-footer">Mais info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -88,7 +83,7 @@
                 <div class="icon">
                     <i class="fa fa-clipboard-check"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="./turmas" class="small-box-footer">Mais info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -103,7 +98,7 @@
                 <div class="icon">
                     <i class="fa fa-window-restore"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="./salas" class="small-box-footer">Mais info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->

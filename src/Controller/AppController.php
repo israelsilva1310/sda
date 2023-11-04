@@ -47,11 +47,6 @@ class AppController extends Controller
 //            //$this->viewBuilder()->setClassName('AdminLTE.AdminLTE');
 //        }
 //    }
-
-        /**
-         * @param Event $event
-         * @return void
-         */
 //    public function beforeFilter(EventInterface $event)
 //    {
 //        parent::beforeFilter($event);

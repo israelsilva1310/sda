@@ -9,24 +9,27 @@ return static function (RouteBuilder $routes) {
 
     $routes->scope('/', function (RouteBuilder $builder) {
 
-        $builder->connect('/', ['controller' => 'Schedules', 'action' => 'index']);
-        $builder->connect('/horarios/*', ['controller' => 'Schedules', 'action' => 'index']);
-        $builder->connect('/login', ['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
+        $builder->connect('/', ['controller' => 'Dashboard', 'action' => 'index']);
+        $builder->connect('/horarios', ['controller' => 'Schedules', 'action' => 'index']);
         $builder->connect('/logout', ['controller' => 'Users', 'action' => 'logout']);
         $builder->connect('/professores', ['controller' => 'Teachers', 'action' => 'index']);
         $builder->connect('/disciplinas', ['controller' => 'Disciplines', 'action' => 'index']);
         $builder->connect('/salas', ['controller' => 'Rooms', 'action' => 'index']);
-        $builder->connect('/usuarios', ['controller' => 'Users', 'action' => 'index']);
         $builder->connect('/cursos', ['controller' => 'Courses', 'action' => 'index']);
+        $builder->connect('/ferramentas', ['prefix' => 'tools', 'controller' => 'Systems', 'action' => 'tools']);
         //$builder->connect('/pages/*', 'Pages::display');
 
         $builder->fallbacks();
     });
 
     $routes->prefix('admin', function (RouteBuilder $builder) {
-        $builder->connect('/', ['controller' => 'Dashboard', 'action' => 'admin']);
-        $builder->connect('/login', ['controller' => 'Users', 'action' => 'login']);
+        $builder->connect('/', ['controller' => 'Dashboard', 'action' => 'index']);
+
         //$builder->connect('/admin/*', 'index');
+        $builder->fallbacks();
+    });
+    $routes->prefix('tools', function (RouteBuilder $builder) {
+        $builder->connect('/', ['controller' => 'Systems', 'action' => 'index']);
         $builder->fallbacks();
     });
 

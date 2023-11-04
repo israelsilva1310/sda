@@ -29,8 +29,8 @@
                 <?= $this->Form->control('period') ?>
                 <?= $this->Form->control('teacher_id', ['options' => $teachers, 'empty' => true]) ?>
                 <?= $this->Form->control('discipline_id', ['options' => $disciplines, 'empty' => true]) ?>
-                <?= $this->Form->control('day', ['options' => $weekGrid['dia'], 'empty' => true]) ?>
-                <?= $this->Form->control('hour', ['options' => $weekGrid['hora'], 'empty' => true]) ?>
+                <?= $this->Form->control('day', ['options' => $diasemanas, 'empty' => true]) ?>
+                <?= $this->Form->control('hour', ['options' => $horaaulas, 'empty' => true]) ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>

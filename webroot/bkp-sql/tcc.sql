@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 25-Out-2023 às 21:20
+-- Tempo de geração: 04-Nov-2023 às 22:05
 -- Versão do servidor: 8.0.31
 -- versão do PHP: 8.2.0
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `tcc`
 --
-CREATE DATABASE IF NOT EXISTS `tcc` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `tcc`;
 
 -- --------------------------------------------------------
 
@@ -140,12 +138,12 @@ CREATE TABLE IF NOT EXISTS `disciplines` (
 --
 
 INSERT INTO `disciplines` (`id`, `name`, `teacher_id`, `course_id`, `workload`, `created`, `modified`, `room_id`) VALUES
-(1, 'Programação I', NULL, NULL, 80, '2023-06-28 15:07:20', '2023-06-28 18:07:56', NULL),
-(3, 'Ética e Cidadania', NULL, NULL, 40, '2023-06-28 18:19:20', '2023-06-28 18:19:20', NULL),
-(4, 'Fundamentos de Matemática', NULL, NULL, 120, '2023-06-28 18:19:31', '2023-06-28 18:19:31', NULL),
-(5, 'Inglês', NULL, NULL, 80, '2023-06-28 18:19:44', '2023-06-28 18:19:44', NULL),
-(6, 'Lógica de Programação', NULL, NULL, 40, '2023-06-28 18:19:55', '2023-06-28 18:19:55', NULL),
-(7, 'Organização de Computadores', NULL, NULL, 40, '2023-06-28 18:20:05', '2023-07-10 20:47:09', NULL),
+(1, 'Programação I', NULL, 1, 80, '2023-06-28 15:07:20', '2023-10-27 18:00:12', 1),
+(3, 'Ética e Cidadania', NULL, 1, 40, '2023-06-28 18:19:20', '2023-10-27 18:00:25', 6),
+(4, 'Fundamentos de Matemática', NULL, 1, 120, '2023-06-28 18:19:31', '2023-10-27 17:57:52', 1),
+(5, 'Inglês', NULL, 1, 80, '2023-06-28 18:19:44', '2023-10-27 17:58:13', 1),
+(6, 'Lógica de Programação', NULL, 1, 40, '2023-06-28 18:19:55', '2023-10-27 17:58:25', 1),
+(7, 'Organização de Computadores', NULL, 1, 40, '2023-06-28 18:20:05', '2023-10-27 17:58:42', 5),
 (11, 'Comunicação de Dados I', 29, 1, 40, '2023-07-13 20:33:55', '2023-07-13 20:33:55', NULL),
 (13, 'Tópicos Especiais em Redes', NULL, 1, 40, '2023-08-20 17:06:19', '2023-08-20 17:06:19', NULL),
 (14, 'Virtualização', NULL, 1, 40, '2023-08-20 17:06:35', '2023-08-20 17:06:35', NULL),
@@ -190,12 +188,14 @@ CREATE TABLE IF NOT EXISTS `disponibilities` (
   `active` tinyint(1) DEFAULT '1',
   `teacher_id` int NOT NULL,
   `hour_id` int NOT NULL,
+  `pediod_id` int DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `07:00` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `teacher_id` (`teacher_id`),
-  KEY `hour_id` (`hour_id`)
+  KEY `hour_id` (`hour_id`),
+  KEY `disponibilities_periods_id_fk` (`pediod_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Table of disponibilityes in hours';
 
 -- --------------------------------------------------------
@@ -332,6 +332,48 @@ INSERT INTO `rooms` (`id`, `location`, `name`, `created`, `modified`, `active`) 
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `schedules`
+--
+
+DROP TABLE IF EXISTS `schedules`;
+CREATE TABLE IF NOT EXISTS `schedules` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `course_id` int DEFAULT NULL,
+  `period` int DEFAULT NULL,
+  `teacher_id` int DEFAULT NULL,
+  `discipline_id` int DEFAULT NULL,
+  `day` varchar(15) DEFAULT NULL,
+  `hour` varchar(15) DEFAULT NULL,
+  `Segunda` varchar(255) DEFAULT NULL,
+  `terca` varchar(255) DEFAULT NULL,
+  `quarta` varchar(255) DEFAULT NULL,
+  `quinta` varchar(255) DEFAULT NULL,
+  `sexta` varchar(255) DEFAULT NULL,
+  `created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `modified` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `schedules`
+--
+
+INSERT INTO `schedules` (`id`, `course_id`, `period`, `teacher_id`, `discipline_id`, `day`, `hour`, `Segunda`, `terca`, `quarta`, `quinta`, `sexta`, `created`, `modified`) VALUES
+(4, 1, 6, 37, 23, 'segunda', '19:00', NULL, NULL, NULL, NULL, NULL, '2023-10-27 21:07:15', '2023-11-04 00:00:51'),
+(5, 1, 6, 37, 23, 'segunda', '19:50', NULL, NULL, NULL, NULL, NULL, '2023-10-30 15:46:33', '2023-11-03 23:52:43'),
+(6, 3, 6, 38, 28, 'segunda', '20:50', NULL, NULL, NULL, NULL, NULL, '2023-10-30 15:47:15', '2023-11-03 23:59:04'),
+(7, 1, 6, 38, 28, 'segunda', '21:40', NULL, NULL, NULL, NULL, NULL, '2023-10-30 16:19:43', '2023-11-03 23:59:12'),
+(12, 1, 6, 45, 34, 'terca', '19:00', NULL, NULL, NULL, NULL, NULL, '2023-10-30 18:36:38', '2023-11-04 00:00:19'),
+(14, 1, 6, 45, 34, 'terca', '19:50', NULL, NULL, NULL, NULL, NULL, '2023-11-02 15:59:15', '2023-11-03 23:56:36'),
+(15, 3, 6, 40, 16, 'quarta', '19:00', NULL, NULL, NULL, NULL, NULL, '2023-11-02 17:07:52', '2023-11-03 23:56:56'),
+(16, 1, 6, 40, 16, 'quarta', '19:50', NULL, NULL, NULL, NULL, NULL, '2023-11-02 21:14:21', '2023-11-04 16:32:18'),
+(17, 1, 6, 46, 26, 'terca', '20:50', NULL, NULL, NULL, NULL, NULL, '2023-11-03 23:57:26', '2023-11-04 00:01:46'),
+(18, 1, 6, 46, 26, 'terca', '21:40', NULL, NULL, NULL, NULL, NULL, '2023-11-03 23:58:35', '2023-11-04 00:01:54'),
+(19, 1, 6, 47, 27, 'quarta', '17', NULL, NULL, NULL, NULL, NULL, '2023-11-04 16:08:09', '2023-11-04 16:33:02');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `sectors`
 --
 
@@ -397,8 +439,8 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   `id` int NOT NULL AUTO_INCREMENT,
   `qrcode` text,
   `hash` varchar(255) DEFAULT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
   `acronym` varchar(10) DEFAULT NULL,
   `user_id` int DEFAULT NULL,
   `discipline_id` int DEFAULT NULL,
@@ -409,7 +451,7 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `teachers`
@@ -430,7 +472,110 @@ INSERT INTO `teachers` (`id`, `qrcode`, `hash`, `first_name`, `last_name`, `acro
 (48, '<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAABnRSTlMA/wD/AP83WBt9AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEm0lEQVR4nO3dy46lNhRA0VSU///lyiwDBkiWfTbQWWt8X9W9ZWHA5uf39/cvGPb30z+A/wWdUdAZBZ1R0BkFnVHQGQWdUdAZBZ1R0BkFnVHQGQWdUdAZBZ1R0BkFnVHQGYV/dt788/Nz6nfcuyxi2PnepY+6Xzxxee/Si+8tLdp46n9hifGMgs4o6IyCzihszQMuDi45PnjUvHSkv/O9S9OCgzOb+0/ecfBXGc8o6IyCzijojMLJecDF3BnwpQPwg6fpl957/6uW3nsxd7VgbvMo4xkFnVHQGQWdURicB2TmjvSXPuqpyxKfYDyjoDMKOqOgMwqfnAcs3YHzRX/etMB4RkFnFHRGQWcUBucB2eH5zqn2nWXDlxfvrA+Y85JJkvGMgs4o6IyCziicnAc8ddo6O3u+M4fY+eSdj3oJ4xkFnVHQGQWdUdiaB7zkXPPBE/Fzf9EXF/ceZDyjoDMKOqOgMwrd8wMOLqNdcnCBbjZLmLvw8NT/gvGMgs4o6IyCziicvB5w8OaWg2ftn1pz+9Ri5p1nn839WxnPKOiMgs4o6IzC4PWApZPaB9fr3r/4/kcumXtCQPZF2WTFeEZBZxR0RkFnFH4O3nKzcyZ67ovuPbWp0dyllOyLlhjPKOiMgs4o6IzCY88PeOfagqcuLSzJ1lIcnCUYzyjojILOKOiMwlv2DX3qEPupXTaful1n7jLMPeMZBZ1R0BkFnVHo9g3N7ohf+qjM3J9wcJXGHOMZBZ1R0BkFnVEYXB+QrQS+f++SgzfXZ1uQzk10XA/gY3RGQWcUdEZhax6w9k3nFhUfPMc9dyw/t4h6blbk+QF8m84o6IyCziic3Dd0adP/nY3sd54u8NSCgCUvuZfpIOMZBZ1R0BkFnVEYfI7Y/Ysvdu6XX/qiHXO3CWU/48L6AP4oOqOgMwo6o9BdDzh4q89LzvgffGBy9gc+tWzYeEZBZxR0RkFnFAb3Czp4uLrzydmkYe4xBk9t9nmQ8YyCzijojILOKAw+P2DudPnOiw9+7xftrOHYYTyjoDMKOqOgMwon7wvaefHcjkBLC5KXHPzzD773nRcPjGcUdEZBZxR0RmFw39CnHi/81IFw9lEH11JkjGcUdEZBZxR0RuHkc8Tuzd1zkt0XdPAZAPfvnfPUJMl4RkFnFHRGQWcUBtcJz733cnyaHa0v2fmiL+4Mes94RkFnFHRGQWcUuvUBO5Zu6n9qD86lF88tU3jJjUAXxjMKOqOgMwo6o3Byv6CDR6A7+4Ye3GsouzF/bi3F/RftPJl5ifGMgs4o6IyCziicnAdczO1ykz3HeO6JXTvmLsPMPajZeEZBZxR0RkFnFAbnAZlPbJhzkW0FusS+oXybzijojILOKHxyHrB0r/3OjflzW4HuvHfuAW1zMyrjGQWdUdAZBZ1ROLlv6NytLzs7gz51pD+38uAie9bCDuMZBZ1R0BkFnVE4eT3gJVtUXsztCLR0HeLeF2djS4xnFHRGQWcUdEZh8HnC8B/jGQWdUdAZBZ1R0BkFnVHQGQWdUdAZBZ1R0BkFnVHQGQWdUdAZBZ1R0BkFnVHQGYV/AafnmOEQJxP9AAAAAElFTkSuQmCC\" alt=\"QR Code\" />', 'dc28da1a3ef7ca546714ab18878d1a81079d0867e954742d113ae13e146dd09f', 'Regis Fernandes', 'Gontijo', 'rfgj', NULL, 27, 'shaun.abbott@yahoo.com', 'Mestre', '467154582', 1, '2023-01-01 20:42:30', '2023-08-28 23:42:53'),
 (49, '<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAABnRSTlMA/wD/AP83WBt9AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEiUlEQVR4nO3dQW7jOBRAwclg7n/l9KZXWgggyP8ke6q2cSIneSBEi6J+fn9//4Fh/z79Bvhf0BkFnVHQGQWdUdAZBZ1R0BkFnVHQGQWdUdAZBZ1R0BkFnVHQGQWdUdAZBZ1R+G/nm39+fk69j3v3NzFc3sbcHQ9LB7p/8c6f7uCP2jnuEuMZBZ1R0BkFnVHYmgdcHDwBvz+3XTrzXXpxdrY+N1nJ/gtLjGcUdEZBZxR0RuHkPOBi5wR86cWXA90fd+dA9w5eLdh58f333pubnRjPKOiMgs4o6IzC4DxgztKZ/tKlhbklNztn+l+wt6vxjILOKOiMgs4ofOQ84ODC/LnVO3PrkT5xWmA8o6AzCjqjoDMKg/OAl9yve5FdLdiZYRz8071k0mA8o6AzCjqjoDMKJ+cB2cY1O+auFuz8+gevUrzzv2A8o6AzCjqjoDMKPy/5vDjz1Caj96wLggN0RkFnFHRGYWseMHcb7VM/+eAFgIN3Hsy952xzU+MZBZ1R0BkFnVE4OQ/ITpPnPi7PfqPsqQZzE44lxjMKOqOgMwo6o3ByXdDB7Tx3vvede3/unGIf/N6nnm5mPKOgMwo6o6AzClv3CWeP21366lOL659atv/UrGiJ8YyCzijojILOKGzNA3bOMXc27Dz4ruZW7yx9deldLckeXHzPeEZBZxR0RkFnFF76/IBsYX52N++OuesuS8d1fwBvpzMKOqOgMwqD+4bO7Xr/1Gaf79wCaOlATy1eMp5R0BkFnVHQGYXH9gu699R9swdfPOcldyAvMZ5R0BkFnVHQGYXH1gUtLdtfOtBTZ/rZVYq59zw3lTGeUdAZBZ1R0BmF7jliT+1YueSd9wdkZ/pz/yPjGQWdUdAZBZ1ROHk94OCymbkVRxdPPRJg6UD35pYJWRfEh9EZBZ1R0BmFwXVBFwfPbee2AJqbFrxkfc6F54jxVXRGQWcUdEbh5Dzg4J4/B0/edxy8ieHiJbuZZou1jGcUdEZBZxR0RuEtzw/Ith5aOi/ONlPa+eq9g1c43B/A2+mMgs4o6IxCt2/oO3e9zz7TX3obB2/u3eF6AB9GZxR0RkFnFLrrATsfxB+ccLxknf7BT/ztFwR/6YyCzijojMJbrgdkW/NnOxHde2pHUs8T5pvpjILOKOiMwtY84CkHF8jPeephy/dvY+knux7Ah9EZBZ1R0BmFrXVBL/n0fO5Kw873vmSJ0YXnB/DNdEZBZxR0RqF7jtiSuWVC2aRh6Y6H+wPN/TU8P4CvojMKOqOgMwqD9wnPrd55ySajBx8ctmTnF8xO/C+MZxR0RkFnFHRGoXue8Jy5LYAO3vmc3R+Q3XG9xHhGQWcUdEZBZxS+YR4wt+TmJSf+9we62JklLP2oJcYzCjqjoDMKOqPwlucJ75jbbf+gua14PuJtGM8o6IyCzijojMLJeUC2fdDF3MqfpRcf3IpnbvHS3COg7xnPKOiMgs4o6IzCRz4/gI9jPKOgMwo6o6AzCjqjoDMKOqOgMwo6o6AzCjqjoDMKOqOgMwo6o6AzCjqjoDMKOqPwB70a+6j/JzTiAAAAAElFTkSuQmCC\" alt=\"QR Code\" />', 'bde48f61f91b03372c71e2cb8c12b056f541984fe7e439fb040ba5602b3b6644', 'Ivan Paulino', 'Pereira', 'ippa', NULL, 1, 'annie01@rice.com', 'Especialista', '313923462', 1, '2023-01-01 20:42:30', '2023-08-28 23:43:16'),
 (50, '<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAABnRSTlMA/wD/AP83WBt9AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEkklEQVR4nO3dQY7bOBRAwfEg979yZ5OVFgII8j/JSdU27baTPBCULJKfn5+f/2DY/09/AP4JOqOgMwo6o6AzCjqjoDMKOqOgMwo6o6AzCjqjoDMKOqOgMwo6o6AzCjqjoDMKv3Ze/Pl8Tn2Oe/eLGC4fY2fFQ/ardv70/o3m7PxrGM8o6IyCzijojMLWdcDFwSXH93PbpZnvzjR56bWXv/7Bif/SZUH2v7DEeEZBZxR0RkFnFE5eB1zsTKKXfvjyRvfvu3Nv/eBrD0787839LywxnlHQGQWdUdAZhcHrgDk7M+65X3X/2p0/PXhZ8BTjGQWdUdAZBZ1R+MrrgJ3lAjtz6qUfPvhQzTdO/C+MZxR0RkFnFHRGYfA6YG72OjeX33ku6P6Hn3o+5yXXEMYzCjqjoDMKOqNw8jog27hmx86a27nVvEsPL71k+6AlxjMKOqOgMwo6o/B5yf3iTLZA9+DHuPjG/zLjGQWdUdAZBZ1R2LoOmHsE/p2/eWe2vnOFke1ENHcZZDyjoDMKOqOgMwonvw/I7nE/dbt85/mcg8sF5l47d1lgPKOgMwo6o6AzCoPniC1NhOem9gd3Bp2bU7/keGHfB/DddEZBZxR0RuHkc0HZdp4Hn+25NzcvfsmRANk3K8YzCjqjoDMKOqMwuF/QZRaZPaj+1DliO5dBS17yxNES4xkFnVHQGQWdUXjL+oCLbHHv3F9/6WMsyVYg37/vEuMZBZ1R0BkFnVEYvA5Y8pI773PLaP/xHUmNZxR0RkFnFHRGYXB9wMEJ6Uvunt97aiueg9c99gviu+mMgs4o6IzCY98HZBv1XMw9Ap/d4r9/3+xRnyXGMwo6o6AzCjqjcHKd8MVTz8ksLVc+6KkrDOsD4A+dUdAZBZ1RGLwOuLdzi39uqnvQ3PM5S2/01IKAC+MZBZ1R0BkFnVHYug54au/PnTd66vyAg/Pxpb/+U8e3XRjPKOiMgs4o6IxC933A3OkCc+YevX/qzLWnDiwznlHQGQWdUdAZhbecJ7zzRgfPIn7np7p4atW09QG8nc4o6IyCzii8dN/Qi7mp/VM7kj61TPopxjMKOqOgMwo6o9DtF5Tden7JutmDlwVzn9n5AfxVdEZBZxR0RuGl+wW9cwVAthB6yf1rnzrd7MJ4RkFnFHRGQWcUTp4jlnnqqKy51ctzXwDMLctYYjyjoDMKOqOgMwon9w2dc3DvnYOvvbc0tT/4fcDBwxV8H8CX0RkFnVHQGYWTzwXN3Xm/f6OD5wccnPgffG02W5/7csh4RkFnFHRGQWcUBtcHzD29M3dv/eBN/KUzkOc2Gd15o4OMZxR0RkFnFHRG4bF1wnNesmP+U0cCLH2M7LLAeEZBZxR0RkFnFP6G64C5jXrmtvOc2yDo/mNkG4VeGM8o6IyCzijojEJ3fkAm24s/2/sz26/U9wF8N51R0BkFnVE4eR2QbR908H2z8wPmdvV56kjkJcYzCjqjoDMKOqPwlecH8HWMZxR0RkFnFHRGQWcUdEZBZxR0RkFnFHRGQWcUdEZBZxR0RkFnFHRGQWcUdEZBZxR+A55TEJPQg3LqAAAAAElFTkSuQmCC\" alt=\"QR Code\" />', 'f125e13b87907dd0bfa7518e4cff46269da0eb4c11c653fc8a2b5c928b97eddf', 'Diego Andres', 'Parada Rozo', 'dapr', NULL, 19, 'frederic75@wintheiser.com', 'Doutor', '781447704', 1, '2023-01-01 20:42:30', '2023-08-28 23:43:16'),
-(51, '<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAABnRSTlMA/wD/AP83WBt9AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEnElEQVR4nO3dzY7rKBSF0a5Wv/8r355ngITgfHbqrjVN/JOqLQT2AX7+/PnzDwz79+kb4K8gZxTkjIKcUZAzCnJGQc4oyBkFOaMgZxTkjIKcUZAzCnJGQc4oyBkFOaMgZxTkjMJ/Jwf//Pzcuo+19SSGj9s4mfGQnerk0/WF5pz8NbRnFOSMgpxRkDMKR+OADxenHK/7tls93/WXP+553R9fH7v+dOsXnQwLsv/CFu0ZBTmjIGcU5IzCzXHAh61e5Fbvdd1NPum8nxy7PtXJsODE3H9hi/aMgpxRkDMKckZhcBwwZ6u3fvIgfuu669vY+vTkuu+kPaMgZxTkjIKcUfjKccDJdIGTYcFTnfdfsMeD9oyCnFGQMwpyRmFwHDDXez2ZzZv15eeKiOZ+7xztGQU5oyBnFOSMws1xwFeUr8wt43OxAOnEO/8L2jMKckZBzijIGYWflzwvzsw9eV9faG3uNl5Ce0ZBzijIGQU5o3A0DpgrgX/qzHOr/J/I7nnuF2nPKMgZBTmjIGcU3jIO+PBU73WuLujEyYXmhkFbtGcU5IyCnFGQMwrdPmIXF/vcMtdrPjnVS2YRb13ohPaMgpxRkDMKckZhcH7A3J5cJy6uOZq9eFjLSqpOaM8oyBkFOaMgZxQG64Iu9vTnOu9Pra5zMsKY+/LFYz9ozyjIGQU5oyBnFG6+D5hbbf+kL/+Syb0XRycnX17f5JpxAG8nZxTkjIKcUejWDb34FPti9c47VwSaGxWtzf1A7RkFOaMgZxTkjMJjdUEnPd+1r6iTufg+4ER2Ie0ZBTmjIGcU5IzCzfWC1rb68tkmXHNbBJ90sS8+4s96+mvaMwpyRkHOKMgZhcFxwMnT86fWwLn4tuDkuutjLw6SsrIo7RkFOaMgZxTkjMLgPOG5ua/rY9d3dXLdr6ih2qIuiF9FzijIGQU5o3D0PuAl9fJzi95cnJ+cVRx9mPu9W7RnFOSMgpxRkDMKXV3Q2txz+bmpBiejk5P5AXPVSvYT5rvJGQU5oyBnFG6uF5T1T7fMrbafre6ZvQ+YKxPSnlGQMwpyRkHOKAyOA56ac7tlboSRTbxYf3mL/QP4bnJGQc4oyBmFx94HbJ3qYnHL3LThuUWNXlIldUJ7RkHOKMgZBTmj8Nj8gKwCZ+2kL5+NTk5uY31XJ6faoj2jIGcU5IyCnFG4uW5o5qmH2ltOiqaeegGwZn4AbydnFOSMgpxRuLlu6Jy5R/wXn4+vFwpdu/g+IFuJaIv2jIKcUZAzCnJG4WZd0FP7W633yF0fu3Xdd57qqdcDW7RnFOSMgpxRkDMKL90/4OKZt8ztEDA3p3rLU1VS2jMKckZBzijIGYXBcUDmnQvmPLUn8MlUZ3VBfDc5oyBnFOSMwm8YB1wskN8688VynadKjOwnzK8iZxTkjIKcURgcB2QlKE/tUPaS+RAXlz71PoDvJmcU5IyCnFG4OQ54ag7qh7nXA+9c+3PuQt4H8GXkjIKcUZAzCl+5fwBfR3tGQc4oyBkFOaMgZxTkjIKcUZAzCnJGQc4oyBkFOaMgZxTkjIKcUZAzCnJGQc4oyBmF/wGQp/6uBXrWhQAAAABJRU5ErkJggg==\" alt=\"QR Code\" />', '56a9ea49dcbf1699d31730fc2fbe62f83d1866989fc53a5d073b55f67c9193b5', 'Kelen Cristina', 'Duarte', 'kcrt', NULL, 18, 'zoconnell@hotmail.com', 'Mestra', '1764365054', 1, '2023-01-01 20:42:30', '2023-08-28 23:42:53');
+(51, '<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAIAAACU3mM+AAAABnRSTlMA/wD/AP83WBt9AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEnElEQVR4nO3dzY7rKBSF0a5Wv/8r355ngITgfHbqrjVN/JOqLQT2AX7+/PnzDwz79+kb4K8gZxTkjIKcUZAzCnJGQc4oyBkFOaMgZxTkjIKcUZAzCnJGQc4oyBkFOaMgZxTkjMJ/Jwf//Pzcuo+19SSGj9s4mfGQnerk0/WF5pz8NbRnFOSMgpxRkDMKR+OADxenHK/7tls93/WXP+553R9fH7v+dOsXnQwLsv/CFu0ZBTmjIGcU5IzCzXHAh61e5Fbvdd1NPum8nxy7PtXJsODE3H9hi/aMgpxRkDMKckZhcBwwZ6u3fvIgfuu669vY+vTkuu+kPaMgZxTkjIKcUfjKccDJdIGTYcFTnfdfsMeD9oyCnFGQMwpyRmFwHDDXez2ZzZv15eeKiOZ+7xztGQU5oyBnFOSMws1xwFeUr8wt43OxAOnEO/8L2jMKckZBzijIGYWflzwvzsw9eV9faG3uNl5Ce0ZBzijIGQU5o3A0DpgrgX/qzHOr/J/I7nnuF2nPKMgZBTmjIGcU3jIO+PBU73WuLujEyYXmhkFbtGcU5IyCnFGQMwrdPmIXF/vcMtdrPjnVS2YRb13ohPaMgpxRkDMKckZhcH7A3J5cJy6uOZq9eFjLSqpOaM8oyBkFOaMgZxQG64Iu9vTnOu9Pra5zMsKY+/LFYz9ozyjIGQU5oyBnFG6+D5hbbf+kL/+Syb0XRycnX17f5JpxAG8nZxTkjIKcUejWDb34FPti9c47VwSaGxWtzf1A7RkFOaMgZxTkjMJjdUEnPd+1r6iTufg+4ER2Ie0ZBTmjIGcU5IzCzfWC1rb68tkmXHNbBJ90sS8+4s96+mvaMwpyRkHOKMgZhcFxwMnT86fWwLn4tuDkuutjLw6SsrIo7RkFOaMgZxTkjMLgPOG5ua/rY9d3dXLdr6ih2qIuiF9FzijIGQU5o3D0PuAl9fJzi95cnJ+cVRx9mPu9W7RnFOSMgpxRkDMKXV3Q2txz+bmpBiejk5P5AXPVSvYT5rvJGQU5oyBnFG6uF5T1T7fMrbafre6ZvQ+YKxPSnlGQMwpyRkHOKAyOA56ac7tlboSRTbxYf3mL/QP4bnJGQc4oyBmFx94HbJ3qYnHL3LThuUWNXlIldUJ7RkHOKMgZBTmj8Nj8gKwCZ+2kL5+NTk5uY31XJ6faoj2jIGcU5IyCnFG4uW5o5qmH2ltOiqaeegGwZn4AbydnFOSMgpxRuLlu6Jy5R/wXn4+vFwpdu/g+IFuJaIv2jIKcUZAzCnJG4WZd0FP7W633yF0fu3Xdd57qqdcDW7RnFOSMgpxRkDMKL90/4OKZt8ztEDA3p3rLU1VS2jMKckZBzijIGYXBcUDmnQvmPLUn8MlUZ3VBfDc5oyBnFOSMwm8YB1wskN8688VynadKjOwnzK8iZxTkjIKcURgcB2QlKE/tUPaS+RAXlz71PoDvJmcU5IyCnFG4OQ54ag7qh7nXA+9c+3PuQt4H8GXkjIKcUZAzCl+5fwBfR3tGQc4oyBkFOaMgZxTkjIKcUZAzCnJGQc4oyBkFOaMgZxTkjIKcUZAzCnJGQc4oyBmF/wGQp/6uBXrWhQAAAABJRU5ErkJggg==\" alt=\"QR Code\" />', '56a9ea49dcbf1699d31730fc2fbe62f83d1866989fc53a5d073b55f67c9193b5', 'Kelen Cristina', 'Duarte', 'kcrt', NULL, 18, 'zoconnell@hotmail.com', 'Mestra', '1764365054', 1, '2023-01-01 20:42:30', '2023-08-28 23:42:53'),
+(57, NULL, NULL, 'Ana Carolina Oliveira', 'Oliveira', '', NULL, NULL, '', '', '', 1, NULL, '2023-11-04 21:34:06'),
+(58, NULL, NULL, 'Angelo Oliveira', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(59, NULL, NULL, 'Débora Simões', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(60, NULL, NULL, 'Fábio Albarici', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(61, NULL, NULL, 'Renata Paula', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(62, NULL, NULL, 'Julierme Penha', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(63, NULL, NULL, 'Fabiane Maciel', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(64, NULL, NULL, 'Lucas Marinello', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(65, NULL, NULL, 'Paulo Borges', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(66, NULL, NULL, 'Luciano Barbosa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(67, NULL, NULL, 'Raquel Louzada', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(68, NULL, NULL, 'Rafaela Alves', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(69, NULL, NULL, 'Verônica', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(70, NULL, NULL, 'Sindynara', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(71, NULL, NULL, 'Rodrigo Palomo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(72, NULL, NULL, 'Kátia Balieiro', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(73, NULL, NULL, 'José Luiz Pereira', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(74, NULL, NULL, 'Jamil Pereira', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(75, NULL, NULL, 'Hebe Carvalho', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(76, NULL, NULL, 'Gusthavo da Costa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(77, NULL, NULL, 'Fernando Barbosa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(78, NULL, NULL, 'Evando Coelho', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(79, NULL, NULL, 'Cleber Kouri', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(80, NULL, NULL, 'Carlos Magno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:32'),
+(81, NULL, NULL, 'André Lema', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(82, NULL, NULL, 'Verônica Moraes', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(83, NULL, NULL, 'Oswaldo Kameyama', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(84, NULL, NULL, 'Mariana Dutra', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(85, NULL, NULL, 'Maiquel Santos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(86, NULL, NULL, 'Emanuelle Oliveia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(87, NULL, NULL, 'Flávia Rebello', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(88, NULL, NULL, 'Ana Cristina', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(89, NULL, NULL, 'Cícera Silva', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(90, NULL, NULL, 'Wallace Correa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(91, NULL, NULL, 'Rafael Bolleli', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(92, NULL, NULL, 'Nilton Souto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(93, NULL, NULL, 'Marcos Magalhães', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(94, NULL, NULL, 'Mara Ávila', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(95, NULL, NULL, 'Paulo Rodrigues', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(96, NULL, NULL, 'Constantina Paparadis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(97, NULL, NULL, 'Antônio Vilas Boas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(98, NULL, NULL, 'Giovani Silva', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(99, NULL, NULL, 'Fátima Saionara', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(100, NULL, NULL, 'Fernanda Leonardi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(101, NULL, NULL, 'João Lopes', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(102, NULL, NULL, 'Lívia Vieira', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(103, NULL, NULL, 'Ediano Prado', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(104, NULL, NULL, 'Marcus Marcu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(105, NULL, NULL, 'Cibele lopes', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(106, NULL, NULL, 'Roberto Vies', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(107, NULL, NULL, 'Fabiano Silv', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(108, NULL, NULL, 'Renata Klehm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(109, NULL, NULL, 'Ludmila Giar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(110, NULL, NULL, 'Paula Coelho', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(111, NULL, NULL, 'Melissa Bres', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(112, NULL, NULL, 'Lidiane Teix', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(113, NULL, NULL, 'Jarbas Santos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(114, NULL, NULL, 'Geraldo Almeida', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(115, NULL, NULL, 'Max Oliveira', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(116, NULL, NULL, 'Régis Gontijo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(117, NULL, NULL, 'André di Salvo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(118, NULL, NULL, 'Helder Caldas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(119, NULL, NULL, 'Ivan Pereira', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(120, NULL, NULL, 'Thiago Crestani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(121, NULL, NULL, 'Luciana Faria ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:33'),
+(122, NULL, NULL, 'Maria de Fátima Bueno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(123, NULL, NULL, 'Matheus Guedes       ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(124, NULL, NULL, 'Roberta Garcia       ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(125, NULL, NULL, 'Diego Rozo           ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(126, NULL, NULL, 'Daniel Lupinacci     ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(127, NULL, NULL, 'José Oliveira        ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(128, NULL, NULL, 'Juliano Lima         ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(129, NULL, NULL, 'Adriana Almeida      ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(130, NULL, NULL, 'Alexandre de Carvalho', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(131, NULL, NULL, 'Antônio Gomes        ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(132, NULL, NULL, 'Carlos Silva         ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(133, NULL, NULL, 'Marcus Vinícius      ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(134, NULL, NULL, 'Carlos Augusto       ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(135, NULL, NULL, 'Luiz Fernando        ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(136, NULL, NULL, 'Miriam Rosa          ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(137, NULL, NULL, 'Geslaine Silva       ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(138, NULL, NULL, 'João Rezende         ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(139, NULL, NULL, 'Maurício Menezes     ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(140, NULL, NULL, 'Bruno Misse          ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(141, NULL, NULL, 'Ademir Pereira       ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(142, NULL, NULL, 'Eduarda Reis         ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(143, NULL, NULL, 'Lilian Pinto         ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(144, NULL, NULL, 'Márcio Silva         ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(145, NULL, NULL, 'Rafael Cobra         ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(146, NULL, NULL, 'Selma Barros         ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(147, NULL, NULL, 'Luiz Flávio          ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(148, NULL, NULL, 'Carla Patronieri     ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(149, NULL, NULL, 'Cíntia Zorattini     ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(150, NULL, NULL, 'Davi Medeiros        ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(151, NULL, NULL, 'Everaldo Ferreira    ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(152, NULL, NULL, 'Mariana Pereira      ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(153, NULL, NULL, 'Soraia Barros        ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(154, NULL, NULL, 'Gisele Ribeiro       ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:34'),
+(155, NULL, NULL, 'Alisson Pacheco      ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:35'),
+(156, NULL, NULL, 'Bárbara Maduro       ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:35'),
+(157, NULL, NULL, 'Delmo Lima           ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:35'),
+(158, NULL, NULL, 'Jorge Santos         ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:35'),
+(159, NULL, NULL, 'Alexandro Nunes      ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2023-11-04 21:28:35');
 
 -- --------------------------------------------------------
 
@@ -578,6 +723,7 @@ ALTER TABLE `addresses`
 -- Limitadores para a tabela `disponibilities`
 --
 ALTER TABLE `disponibilities`
+  ADD CONSTRAINT `disponibilities_periods_id_fk` FOREIGN KEY (`pediod_id`) REFERENCES `periods` (`id`),
   ADD CONSTRAINT `fk_hour_id` FOREIGN KEY (`hour_id`) REFERENCES `hours` (`id`),
   ADD CONSTRAINT `fk_teache` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`);
 

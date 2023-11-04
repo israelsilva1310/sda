@@ -1,40 +1,39 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Teacher $teacher
- * @var \Cake\Collection\CollectionInterface|string[] $disciplines
- */
-?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Teachers'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+<div class="container">
+    <div class="card card-primary">
+        <div class="card-header">
+            <div class="side-nav">
+                <legend><?= __('Adicionar Professor') ?></legend>
+            </div>
         </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="teachers form content">
+        <div class="card-body">
             <?= $this->Form->create($teacher) ?>
             <fieldset>
-                <legend><?= __('Add Teacher') ?></legend>
-                <?php
-                    echo $this->Form->control('qrcode');
-                    echo $this->Form->control('hash');
-                    echo $this->Form->control('first_name');
-                    echo $this->Form->control('last_name');
-                    echo $this->Form->control('acronym');
-                    echo $this->Form->control('user_id');
-                    echo $this->Form->control('discipline_id', ['options' => $disciplines, 'empty' => true]);
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('title');
-                    echo $this->Form->control('phone');
-                    echo $this->Form->control('active');
-                    echo $this->Form->control('created_at', ['empty' => true]);
-                    echo $this->Form->control('updated_at');
-                ?>
+                <div class="form-group">
+
+                    <?= $this->Form->control('hash', ['type' => 'hidden']) ?>
+                    <?= $this->Form->control('first_name', ['class' => 'form-control']) ?>
+                    <?= $this->Form->control('last_name', ['class' => 'form-control']) ?>
+                    <?= $this->Form->control('acronym', ['class' => 'form-control']) ?>
+                    <?= $this->Form->control('user_id', ['type' => 'hidden', 'class' => 'form-control']) ?>
+                    <?= $this->Form->control('discipline_id', ['options' => $disciplines, 'empty' => true, 'class' => 'form-control']) ?>
+                    <?= $this->Form->control('email', ['class' => 'form-control']) ?>
+                    <?= $this->Form->control('title', ['class' => 'form-control']) ?>
+                    <?= $this->Form->control('phone', ['class' => 'form-control']) ?>
+                    <?= $this->Form->control('active', ['class' => 'form-check']) ?>
+
+
+
+                </div>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+        </div>
+        <div class="card-footer">
+            <h4 class="heading"><?= __('Ações:') ?></h4>
+            <?= $this->Html->link(__('Cancelar'), [
+                'action' => 'index'], ['class' => 'btn btn-danger side-nav-item float-right']) ?>
+            <?= $this->Form->button(__('Salvar',
+            ), ['class' => 'btn btn-success btn-sm']) ?>
             <?= $this->Form->end() ?>
+
         </div>
     </div>
 </div>

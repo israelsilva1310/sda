@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
+
 /**
  * Teachers Controller
  *
@@ -36,7 +41,7 @@ class TeachersController extends AppController
     public function view($id = null)
     {
         $teacher = $this->Teachers->get($id, [
-            'contain' => ['Disciplines', 'Courses', 'Disponibilities', 'Turmas'],
+            'contain' => ['Disciplines', 'Disponibilities', 'Turmas'],
         ]);
 
         $this->set(compact('teacher'));
@@ -49,17 +54,25 @@ class TeachersController extends AppController
      */
     public function add()
     {
+
         $teacher = $this->Teachers->newEmptyEntity();
-        if ($this->request->is('post')) {
+        $teacher->qrcode = 'teste';
+        $teacher->created_at = date("Y-m-d H:i:s");
+
+        //var_dump($teacher);
+
+        if ($this->request->is('post', 'put')) {
             $teacher = $this->Teachers->patchEntity($teacher, $this->request->getData());
             if ($this->Teachers->save($teacher)) {
-                $this->Flash->success(__('The teacher has been saved.'));
-
+                $this->Flash->success(__('Registro salvo.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The teacher could not be saved. Please, try again.'));
+            //var_dump($teacher);
+            $this->Flash->error(__('Não foi possivel salvar, Tente novamente.'));
         }
+
         $disciplines = $this->Teachers->Disciplines->find('list', ['limit' => 200])->all();
+
         $this->set(compact('teacher', 'disciplines'));
     }
 
@@ -77,12 +90,13 @@ class TeachersController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $teacher = $this->Teachers->patchEntity($teacher, $this->request->getData());
+            $teacher->acronym ='';
             if ($this->Teachers->save($teacher)) {
                 $this->Flash->success(__('The teacher has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The teacher could not be saved. Please, try again.'));
+            $this->Flash->error(__('Não segui alterar o registro, tente novamente.'));
         }
         $disciplines = $this->Teachers->Disciplines->find('list', ['limit' => 200])->all();
         $this->set(compact('teacher', 'disciplines'));
@@ -100,9 +114,9 @@ class TeachersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $teacher = $this->Teachers->get($id);
         if ($this->Teachers->delete($teacher)) {
-            $this->Flash->success(__('The teacher has been deleted.'));
+            $this->Flash->success(__('Registro excluido com sucesso.'));
         } else {
-            $this->Flash->error(__('The teacher could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Não consegui excluir o registro.'));
         }
 
         return $this->redirect(['action' => 'index']);
