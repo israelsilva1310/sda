@@ -10,8 +10,10 @@ return static function (RouteBuilder $routes) {
     $routes->scope('/', function (RouteBuilder $builder) {
 
         $builder->connect('/', ['controller' => 'Dashboard', 'action' => 'index']);
+        $builder->connect('/login', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'login']);
+        $builder->connect('/users/*', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'index']);
         $builder->connect('/horarios', ['controller' => 'Schedules', 'action' => 'index']);
-        $builder->connect('/logout', ['controller' => 'Users', 'action' => 'logout']);
+        $builder->connect('logout', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'logout']);
         $builder->connect('/professores', ['controller' => 'Teachers', 'action' => 'index']);
         $builder->connect('/disciplinas', ['controller' => 'Disciplines', 'action' => 'index']);
         $builder->connect('/salas', ['controller' => 'Rooms', 'action' => 'index']);
@@ -30,6 +32,8 @@ return static function (RouteBuilder $routes) {
     });
     $routes->prefix('tools', function (RouteBuilder $builder) {
         $builder->connect('/', ['controller' => 'Systems', 'action' => 'index']);
+        $builder->connect('/ferramentas', ['controller' => 'Systems', 'action' => 'index']);
+
         $builder->fallbacks();
     });
 

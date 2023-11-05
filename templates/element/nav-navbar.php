@@ -59,7 +59,10 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link px-md-3 py-md-4 text-light fw-bold titulo-menu text-uppercase"
-                           href="./logout">Sair</a>
+                           href="<?= $this->Url->build('/logout', [
+                               'controller' => 'Users',
+                               'action' => 'logout'], ['label' => 'Sair']
+                           ) ?>">Sair</a>
                     </li>
                 </ul>
 

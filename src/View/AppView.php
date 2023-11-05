@@ -19,7 +19,7 @@ class AppView extends View
     public function initialize(): void
     {
         $this->loadHelper('Html');
-
-
+        $this->loadHelper('Form');
+        $this->loadHelper('Flash');
     }
 }

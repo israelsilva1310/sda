@@ -50,18 +50,20 @@ class DisciplinesController extends AppController
     public function add()
     {
         $discipline = $this->Disciplines->newEmptyEntity();
+        //pr($discipline);
         if ($this->request->is('post')) {
             $discipline = $this->Disciplines->patchEntity($discipline, $this->request->getData());
             if ($this->Disciplines->save($discipline)) {
-                $this->Flash->success(__('The discipline has been saved.'));
+                $this->Flash->success(__('Registro Salvo.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The discipline could not be saved. Please, try again.'));
+            $this->Flash->error(__('Não consegui salvar. Verfique o erro.'));
         }
         $courses = $this->Disciplines->Courses->find('list', ['limit' => 200])->all();
+        $teachers = $this->Disciplines->Teachers->find('list', ['limit' => 200])->all();
         $rooms = $this->Disciplines->Rooms->find('list', ['limit' => 200])->all();
-        $this->set(compact('discipline', 'courses', 'rooms'));
+        $this->set(compact('discipline', 'courses', 'rooms', 'teachers'));
     }
 
     /**
@@ -79,11 +81,11 @@ class DisciplinesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $discipline = $this->Disciplines->patchEntity($discipline, $this->request->getData());
             if ($this->Disciplines->save($discipline)) {
-                $this->Flash->success(__('The discipline has been saved.'));
+                $this->Flash->success(__('Registro editado.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The discipline could not be saved. Please, try again.'));
+            $this->Flash->error(__('Erro, tente novamente.'));
         }
         $courses = $this->Disciplines->Courses->find('list', ['limit' => 200])->all();
         $rooms = $this->Disciplines->Rooms->find('list', ['limit' => 200])->all();
@@ -102,9 +104,9 @@ class DisciplinesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $discipline = $this->Disciplines->get($id);
         if ($this->Disciplines->delete($discipline)) {
-            $this->Flash->success(__('The discipline has been deleted.'));
+            $this->Flash->success(__('Registro excluído.'));
         } else {
-            $this->Flash->error(__('The discipline could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Erro, não foi deletado.'));
         }
 
         return $this->redirect(['action' => 'index']);

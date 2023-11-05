@@ -14,6 +14,7 @@ class UsersController extends AppController
 
         $this->set(compact('users'));
     }
+
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
@@ -30,6 +31,7 @@ class UsersController extends AppController
 
         $this->set(compact('user'));
     }
+
     public function add()
     {
         $roles = TableRegistry::getTableLocator()
@@ -40,14 +42,15 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('Registro Salvo.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('Erro Tente novamente.'));
         }
         $this->set(compact(['user', 'roles']));
     }
+
     public function edit($id = null)
     {
         $roles = TableRegistry::getTableLocator()
@@ -60,26 +63,28 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('Registro Salvo.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('Erro Tente novamente.'));
         }
         $this->set(compact(['user', 'roles']));
     }
+
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('Usuario Deletado.'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Erro, Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
     }
+
     public function login()
     {
         if ($this->request->is('post')) {
@@ -88,17 +93,20 @@ class UsersController extends AppController
                 $this->Auth->setUser($user);
 
                 return $this->redirect($this->Auth->redirectUrl());
+                $this->Flash->success('Bem Vindo!');
             } else {
                 $this->Flash->error('Seu email ou senha estão incorretos.');
             }
         }
     }
+
     public function logout()
     {
         $this->Flash->success('Voce Foi deslogado.');
 
         return $this->redirect($this->Auth->logout());
     }
+
     public function register()
     {
         $user = $this->Users->newEntity($this->request->getData());

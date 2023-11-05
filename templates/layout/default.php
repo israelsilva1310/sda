@@ -1,5 +1,5 @@
 <?php
-$cakeDescription = 'TCC: SDA Sistema de Distribuição de Aulas';
+$cakeDescription = 'TCC: SDA';
 ?>
 <html lang="pt-br">
 <head>

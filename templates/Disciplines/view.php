@@ -123,7 +123,7 @@
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'TeacherDisciplines', 'action' => 'view', $teacherDisciplines->]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'TeacherDisciplines', 'action' => 'edit', $teacherDisciplines->]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'TeacherDisciplines', 'action' => 'delete', $teacherDisciplines->], ['confirm' => __('Are you sure you want to delete # {0}?', $teacherDisciplines->)]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'TeacherDisciplines', 'action' => 'delete', $teacherDisciplines->], ['confirm' => __('Are you sure you want to delete # {0}?', $teacherDisciplines)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

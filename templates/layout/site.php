@@ -6,7 +6,7 @@
  **/
 ?>
 <?php
-$cakeDescription = 'Site: SDA Sistema de Distribuição de Aulas';
+$cakeDescription = 'Site: SDA';
 ?>
 <!doctype html>
 <html lang="pt-br" class="no-js">
