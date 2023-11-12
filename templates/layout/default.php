@@ -41,6 +41,7 @@ $cakeDescription = 'TCC: SDA';
 
 <?= $this->element('footer') ?>
 <?= $this->Html->script([
+    'pesquisa',
     'adminlte.min',
     'estilo',
     'dashboard',

@@ -42,16 +42,10 @@ class SchedulesController extends AppController
             '13' => '21:40',
         ];
 
-        $this->set(compact(['schedules', 'horaaulas', 'diasemanas']));
-    }
-
-    public function view($id = null)
-    {
-        $schedule = $this->Schedules->get($id, [
-            'contain' => ['Courses', 'Teachers', 'Disciplines'],
-        ]);
-
-        $this->set(compact('schedule'));
+        $courses = TableRegistry::getTableLocator()
+            ->get('Courses')
+            ->find('list');
+        $this->set(compact(['schedules', 'horaaulas', 'diasemanas', 'courses']));
     }
 
     public function add()
@@ -66,41 +60,32 @@ class SchedulesController extends AppController
             }
             $this->Flash->error(__('The schedule could not be saved. Please, try again.'));
         }
-        $weekGrid = [
-            'dia' => [
-                'segunda' => 'segunda',
-                'terca' => 'terca',
-                'quarta' => 'quarta',
-                'quinta' => 'quinta',
-                'sexta' => 'sexta',
-            ],
-            'hora' => [
-                '07:00' => '07:00 - 07:50',
-                '07:50' => '07:50 - 08:40',
+        $horaaulas = [
+            '1' => '07:00',
+            '2' => '07:50',
 
-                '09:00' => '09:00 - 09:50',
-                '09:50' => '09:50 - 10:40',
-                '10:40' => '10:40 - 11:30',
+            '3' => '09:00',
+            '4' => '09:50',
+            '5' => '10:40',
 
-                '13:10' => '13:10 - 14:00',
-                '14:00' => '14:00 - 14:50',
+            '6' => '13:10',
+            '7' => '14:00',
 
-                '15:20' => '15:20 - 16:10',
-                '16:10' => '16:10 - 17:00',
+            '8' => '15:20',
+            '9' => '16:10',
 
-                '19:00' => '19:00 - 19:50',
-                '19:50' => '19:50 - 20:40',
+            '10' => '19:00',
+            '11' => '19:50',
 
-                '20:50' => '20:50 - 21:40',
-                '21:40' => '21:40 - 22:30',
-            ],
+            '12' => '20:50',
+            '13' => '21:40',
         ];
 
         $courses = $this->Schedules->Courses->find('list', ['limit' => 200])->all();
         $teachers = $this->Schedules->Teachers->find('list', ['limit' => 200])->all();
         $disciplines = $this->Schedules->Disciplines->find('list', ['limit' => 200])->all();
         //$periods = $this->Schedules->Periods->find('list', ['limit' => 20])->all();
-        $this->set(compact('schedule', 'courses', 'teachers', 'disciplines', 'weekGrid'));
+        $this->set(compact('schedule', 'courses', 'teachers', 'disciplines', 'horaaulas'));
     }
 
     /**
@@ -122,99 +107,40 @@ class SchedulesController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The schedule could not be saved. Please, try again.'));
+            $this->Flash->error(__('Horario, salvo.'));
         }
-//        $weekGrid = [
-//            'dia' => [
-//                'segunda',
-//                'terça',
-//                'quarta',
-//                'quinta',
-//                'sexta',
-//            ],
-//            'hora' => [
-//                '07:00 - 07:50',
-//                '07:50 - 08:40',
-//
-//                '09:00 - 09:50',
-//                '09:50 - 10:40',
-//                '10:40 - 11:30',
-//
-//                '13:10 - 14:00',
-//                '14:00 - 14:50',
-//
-//                '15:20 - 16:10',
-//                '16:10 - 17:00',
-//
-//                '19:00 - 19:50',
-//                '19:50 - 20:40',
-//
-//                '20:50 - 21:40',
-//                '21:40 - 22:30',
-//            ],
+//        $diasemanas = [
+//            'Segunda',
+//            'Terça',
+//            'Quarta',
+//            'Quinta',
+//            'Sexta',
 //        ];
-//        $weekGrid = [
-//            'day' => [
-//                'segunda' => 'segunda',
-//                'terça' => 'terça',
-//                'quarta' => 'quarta',
-//                'quinta' => 'quinta',
-//                'sexta' => 'sexta'],
-//            'hour' => [
-//                '07:00 - 07:50' => '07:00 - 07:50',
-//                '07:50 - 08:40' => '07:50 - 08:40',
-//
-//                '09:00 - 09:50' => '09:00 - 09:50',
-//                '09:50 - 10:40' => '09:50 - 10:40',
-//                '10:40 - 11:30' => '10:40 - 11:30',
-//
-//                '13:10 - 14:00' => '13:10 - 14:00',
-//                '14:00 - 14:50' => '14:00 - 14:50',
-//
-//                '15:20 - 16:10' => '15:20 - 16:10',
-//                '16:10 - 17:00' => '16:10 - 17:00',
-//
-//                '19:00 - 19:50' => '19:00 - 19:50',
-//                '19:50 - 20:40' => '19:50 - 20:40',
-//
-//                '20:50 - 21:40' => '20:50 - 21:40',
-//                '21:40 - 22:30' => '21:40 - 22:30',
-//            ]
-//        ];
-        $weekGrid = [
-            'dia' => [
-                'segunda' => 'segunda',
-                'terca' => 'terca',
-                'quarta' => 'quarta',
-                'quinta' => 'quinta',
-                'sexta' => 'sexta',
-            ],
-            'hora' => [
-                '07:00' => '07:00 - 07:50',
-                '07:50' => '07:50 - 08:40',
+        $horaaulas = [
+            '1' => '07:00',
+            '2' => '07:50',
 
-                '09:00' => '09:00 - 09:50',
-                '09:50' => '09:50 - 10:40',
-                '10:40' => '10:40 - 11:30',
+            '3' => '09:00',
+            '4' => '09:50',
+            '5' => '10:40',
 
-                '13:10' => '13:10 - 14:00',
-                '14:00' => '14:00 - 14:50',
+            '6' => '13:10',
+            '7' => '14:00',
 
-                '15:20' => '15:20 - 16:10',
-                '16:10' => '16:10 - 17:00',
+            '8' => '15:20',
+            '9' => '16:10',
 
-                '19:00' => '19:00 - 19:50',
-                '19:50' => '19:50 - 20:40',
+            '10' => '19:00',
+            '11' => '19:50',
 
-                '20:50' => '20:50 - 21:40',
-                '21:40' => '21:40 - 22:30',
-            ],
+            '12' => '20:50',
+            '13' => '21:40',
         ];
 
         $courses = $this->Schedules->Courses->find('list', ['limit' => 200])->all();
         $teachers = $this->Schedules->Teachers->find('list', ['limit' => 200])->all();
         $disciplines = $this->Schedules->Disciplines->find('list', ['limit' => 200])->all();
-        $this->set(compact('schedule', 'courses', 'teachers', 'disciplines', 'weekGrid'));
+        $this->set(compact('schedule', 'courses', 'teachers', 'disciplines', 'horaaulas'));
     }
 
     /**

@@ -20,27 +20,28 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
-        $this->loadComponent('Auth', [
-            'authenticate' => [
-                'Form' => [
-                    'fields' => [
-                        'username' => 'email',
-                        'password' => 'password'
-                    ]
-                ]
-            ],
-            'loginAction' => [
-                'controller' => 'Users',
-                'action' => 'login'
-            ],
-            'logoutAction' => [
-                'controller' => 'Users',
-                'action' => 'login'
-            ]
-        ]);
+//        $this->loadComponent('Auth', [
+//            'authenticate' => [
+//                'Form' => [
+//                    'fields' => [
+//                        'username' => 'email',
+//                        'password' => 'password'
+//                    ]
+//                ]
+//            ],
+//            'loginAction' => [
+//                'controller' => 'Dashboard',
+//                'action' => 'index'
+//            ],
+//            'logoutAction' => [
+//                'prefix' => 'Admin',
+//                'controller' => 'Users',
+//                'action' => 'login'
+//            ]
+//        ]);
 // Permite a ação display, assim nosso pages controller
 // continua a funcionar.
-        $this->Auth->allow(['display']);
+       // $this->Auth->allow(['display']);
     }
 
     public function beforeRender(EventInterface $event)

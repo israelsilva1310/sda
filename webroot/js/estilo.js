@@ -1,5 +1,5 @@
 (function () {
-    var Contrast = {
+    let Contrast = {
         storage: 'contrastState',
         cssClass: 'contrast',
         currentState: null,
@@ -16,44 +16,51 @@
 
     Contrast.check();
 
-    function checkContrast() {
+    function checkContrast()
+    {
         this.updateView();
     }
 
-    function getContrastState() {
+    function getContrastState()
+    {
         return localStorage.getItem(this.storage) === 'true';
     }
 
-    function setContrastState(state) {
+    function setContrastState(state)
+    {
         localStorage.setItem(this.storage, '' + state);
         this.currentState = state;
         this.updateView();
     }
 
-    function updateViewContrast() {
-        var body = document.body;
+    function updateViewContrast()
+    {
+        let body = document.body;
 
-        if (this.currentState === null)
+        if (this.currentState === null) {
             this.currentState = this.getState();
+        }
 
-        if (this.currentState)
+        if (this.currentState) {
             body.classList.add(this.cssClass);
-        else
+        } else {
             body.classList.remove(this.cssClass);
+        }
     }
 
-    function toogleContrast() {
+    function toogleContrast()
+    {
         this.setState(!this.currentState);
     }
 
     window.onload = function () {
-        var elementBody = document.querySelector('.acessivel');
-        var elementBtnIncreaseFont = document.getElementById('increase-font');
-        var elementBtnDecreaseFont = document.getElementById('decrease-font');
+        let elementBody = document.querySelector('.acessivel');
+        let elementBtnIncreaseFont = document.getElementById('increase-font');
+        let elementBtnDecreaseFont = document.getElementById('decrease-font');
         // Padrão de tamanho, equivale a 100% do valor definido no Body
-        var fontSize = 100;
+        let fontSize = 100;
         // Valor de incremento ou decremento, equivale a 10% do valor do Body
-        var increaseDecrease = 10;
+        let increaseDecrease = 10;
 
         // Evento de click para aumentar a fonte
         elementBtnIncreaseFont.addEventListener('click', function (event) {
@@ -81,9 +88,9 @@ $(document).ready(function () {
     });
 
     //carregar aberto o submenu
-    var active = $('.sidebar .active');
+    let active = $('.sidebar .active');
     if (active.length && active.parent('.collapse').length) {
-        var parent = active.parent('.collapse');
+        let parent = active.parent('.collapse');
 
         parent.prev('a').attr('aria-expanded', true);
         parent.addClass('show');

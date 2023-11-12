@@ -8,31 +8,57 @@
  */
 //pr($weekGrid);
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $schedule->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $schedule->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Schedules'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="schedules form content">
-            <?= $this->Form->create($schedule) ?>
-            <fieldset>
-                <legend><?= __('Edit Schedule') ?></legend>
-                <?= $this->Form->control('course_id', ['options' => $courses, 'empty' => true]) ?>
-                <?= $this->Form->control('period') ?>
-                <?= $this->Form->control('teacher_id', ['options' => $teachers, 'empty' => true]) ?>
-                <?= $this->Form->control('discipline_id', ['options' => $disciplines, 'empty' => true]) ?>
-                <?= $this->Form->control('day', ['options' => $diasemanas, 'empty' => true]) ?>
-                <?= $this->Form->control('hour', ['options' => $horaaulas, 'empty' => true]) ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+<div class="card-primary align-content-center">
+
+    <div class="card-header">
+        <h4 class="heading"><?= __('Editar') ?></h4>
+    </div>
+    <legend><?= __('Horario') ?></legend>
+
+    <div class="card-body">
+        <?= $this->Form->create($schedule) ?>
+        <div>
+            <?= $this->Form->control('course_id', [
+                'options' => $courses,
+                'empty' => true,
+                'class' => 'form-select col-4']) ?>
+            <?= $this->Form->control('period', [
+                'options' => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                'class' => 'form-select col-1',
+            ]) ?>
+            <?= $this->Form->control('teacher_id', [
+                'options' => $teachers,
+                'empty' => true,
+                'class' => 'form-select col-3']) ?>
+            <?= $this->Form->control('discipline_id', [
+                'options' => $disciplines,
+                'empty' => true,
+                'class' => 'form-select col-3']) ?>
+            <?= $this->Form->control('day', [
+                'options' => ['segunda', 'terca', 'quarta', 'quinta', 'sexta'],
+                'empty' => true,
+                'class' => 'form-select col-3',
+                'label' => 'Dia']) ?>
+            <?= $this->Form->control('hour', [
+                'options' => $horaaulas,
+                'empty' => true,
+                'class' => 'form-select col-1',
+                'label' => 'Horario']) ?>
+            <div class="card-footer">
+                <?= $this->Form->button(__('Salvar'), [
+                    'class' => 'btn btn-success btn-sm',
+                ]) ?>
+                <?= $this->Html->link(__('Voltar'), [
+                    'action' => 'index'], [
+                    'class' => 'btn btn-warning btn-sm side-nav-item']) ?>
+
+                <?= $this->Form->postLink(
+                    __('Deletar'),
+                    ['action' => 'delete', $schedule->id],
+                    ['confirm' => __('Deseja mesmo excluir o registro # {0}?', $schedule->id),
+                        'class' => 'btn btn-danger btn-sm side-nav-item float-right']
+                ) ?>
+            </div>
             <?= $this->Form->end() ?>
         </div>
     </div>
