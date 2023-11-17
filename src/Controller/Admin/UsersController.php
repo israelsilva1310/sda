@@ -102,7 +102,7 @@ class UsersController extends AppController
 
     public function logout()
     {
-        $this->Flash->success('Voce Foi deslogado.');
+        $this->Flash->success('Voce foi deslogado.');
         return $this->redirect($this->Auth->logout());
     }
 

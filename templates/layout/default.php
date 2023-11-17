@@ -1,5 +1,5 @@
 <?php
-$cakeDescription = 'TCC: SDA';
+$cakeDescription = 'SDA';
 ?>
 <html lang="pt-br">
 <head>
@@ -41,7 +41,7 @@ $cakeDescription = 'TCC: SDA';
 
 <?= $this->element('footer') ?>
 <?= $this->Html->script([
-    'pesquisa',
+    'funcoes',
     'adminlte.min',
     'estilo',
     'dashboard',

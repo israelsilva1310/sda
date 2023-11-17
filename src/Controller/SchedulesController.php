@@ -45,7 +45,10 @@ class SchedulesController extends AppController
         $courses = TableRegistry::getTableLocator()
             ->get('Courses')
             ->find('list');
-        $this->set(compact(['schedules', 'horaaulas', 'diasemanas', 'courses']));
+        $periodos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+
+        $this->set(compact(['schedules', 'horaaulas', 'diasemanas', 'courses', 'periodos']));
     }
 
     public function add()

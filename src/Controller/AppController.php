@@ -20,28 +20,28 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
-//        $this->loadComponent('Auth', [
-//            'authenticate' => [
-//                'Form' => [
-//                    'fields' => [
-//                        'username' => 'email',
-//                        'password' => 'password'
-//                    ]
-//                ]
-//            ],
-//            'loginAction' => [
-//                'controller' => 'Dashboard',
-//                'action' => 'index'
-//            ],
-//            'logoutAction' => [
-//                'prefix' => 'Admin',
-//                'controller' => 'Users',
-//                'action' => 'login'
-//            ]
-//        ]);
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
+                ]
+            ],
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            'logoutAction' => [
+                'prefix' => 'Admin',
+                'controller' => 'Users',
+                'action' => 'login'
+            ]
+        ]);
 // Permite a ação display, assim nosso pages controller
 // continua a funcionar.
-       // $this->Auth->allow(['display']);
+        // $this->Auth->allow(['display']);
     }
 
     public function beforeRender(EventInterface $event)
@@ -58,22 +58,20 @@ class AppController extends Controller
                         $this->request->getParam(['action']) == 'cadastrar') or (
                         $this->request->getParam(['action']) == 'recuperarSenha') or (
                         $this->request->getParam(['action']) == 'atualizarSenha'))) {
+
                 $this->viewBuilder()->setTheme('login');
             } else {
-                $this->viewBuilder()->setLayout('default');
+                //$this->viewBuilder()->setLayout('sda');
                 //$id = null;
                 $perfilUser = $this->Auth->user();
                 $this->set(compact(['perfilUser']));
                 //var_dump($perfilUser);
-
             }
-
         }
-
     }
-//    public function beforeFilter(EventInterface $event)
-//    {
-//        parent::beforeFilter($event);
-//        $this->Auth->allow('add', 'logout', 'authorize', 'index');
-//    }
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow('add', 'logout', 'authorize', 'index');
+    }
 }

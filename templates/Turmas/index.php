@@ -4,10 +4,13 @@
  * @var iterable<\App\Model\Entity\Turma> $turmas
  */
 ?>
-<div class="turmas index content">
-    <?= $this->Html->link(__('Adicionar'), ['action' => 'add'], ['class' => 'btn btn-sm btn-success float-right']) ?>
-    <h3><?= __('Turmas') ?></h3>
-    <div class="table-responsive">
+<div class="card card-primary">
+    <div class="card-header">
+        <h3><?= __('Turmas') ?></h3>
+        <?= $this->Html->link(__('Adicionar'), ['action' => 'add'], ['class' => 'btn btn-sm btn-success float-right']) ?>
+    </div>
+
+    <div class="card-body table-responsive">
         <table class="table table-bordered table-hover  table-striped">
             <thead>
             <tr>
@@ -63,7 +66,7 @@
             </tbody>
         </table>
     </div>
-    <div class="paginator">
+    <div class="paginator card-footer">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>

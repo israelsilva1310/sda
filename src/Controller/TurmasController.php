@@ -31,10 +31,10 @@ class TurmasController extends AppController
         $turma = $this->Turmas->newEmptyEntity();
         //        $instructors = $this->Turmas->Instructors->find('list', ['limit' => 200])->all();
         $courses = $this->Turmas->Courses->find('list', ['limit' => 200])->all();
-        $periods = $this->Turmas->Periods->find('list', ['limit' => 200])->all();
         $sectors = $this->Turmas->Sectors->find('list', ['limit' => 200])->all();
         $teachers = $this->Turmas->Teachers->find('list', ['limit' => 200])->all();
 
+        //pr($this->request);
         if ($this->request->is('post')) {
             $turma = $this->Turmas->patchEntity($turma, $this->request->getData());
             if ($this->Turmas->save($turma)) {
@@ -46,8 +46,7 @@ class TurmasController extends AppController
         }
 
 
-        $this->set(compact(['turma', 'courses', 'sectors', 'periods', 'teachers']));
-        //$this->set(compact('turma', 'instructors', 'courses', 'sectors', 'periods'));
+        $this->set(compact(['turma', 'courses', 'sectors', 'teachers']));
     }
 
     /**
