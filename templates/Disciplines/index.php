@@ -7,7 +7,7 @@
 <div class="container">
     <div class="card card-primary">
         <div class="card-header">
-            <h3><?= __('Disciplines') ?></h3>
+            <h3><?= __('Disciplinas') ?></h3>
             <?= $this->Html->link(__('Adicionar'), ['action' => 'add'], ['class' => 'btn btn-loat btn-right btn-success']) ?>
         </div>
         <div class="card-footer">

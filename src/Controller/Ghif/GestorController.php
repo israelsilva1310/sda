@@ -5,14 +5,15 @@
  *HomePage: https://israelcasilva.com.br
  **/
 
-namespace App\Controller\Admin;
+namespace App\Controller\Ghif;
 
 use App\Controller\AppController;
 
-class DashboardController extends AppController
+class GestorController extends AppController
 {
     public function index()
     {
 
     }
+
 }

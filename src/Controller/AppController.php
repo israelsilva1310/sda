@@ -37,6 +37,10 @@ class AppController extends Controller
                 'prefix' => 'Admin',
                 'controller' => 'Users',
                 'action' => 'login'
+            ],
+            'loginRedirect' => [
+                'controller' => 'Dashadm',
+                'action' => 'index'
             ]
         ]);
 // Permite a ação display, assim nosso pages controller
@@ -69,9 +73,5 @@ class AppController extends Controller
             }
         }
     }
-    public function beforeFilter(EventInterface $event)
-    {
-        parent::beforeFilter($event);
-        $this->Auth->allow('add', 'logout', 'authorize', 'index');
-    }
+
 }

@@ -31,8 +31,8 @@
                         </nav>
                     </div>
                     <?= $this->Html->link(
-                        'Dashboard',
-                        '/Dashboard/index',
+                        'Dashadm',
+                        '/Dashadm/index',
                         ['class' => 'menu-btn button-default button-yellow', 'target' => '_blank']
                     ); ?>
                     <!--                    <button type="button" class="menu-btn button-default button-yellow">Login</button>-->

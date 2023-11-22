@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Test\TestCase\Controller;
+namespace App\Test\TestCase\Controller\Ghif;
 
-use App\Controller\DashboardController;
+use App\Controller\Ghif\RestricaosController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Controller\DashadmController Test Case
+ * App\Controller\Ghif\RestricaosController Test Case
  *
- * @uses \App\Controller\DashboardController
+ * @uses \App\Controller\Ghif\RestricaosController
  */
-class DashboardControllerTest extends TestCase
+class RestricaosControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
@@ -22,14 +22,15 @@ class DashboardControllerTest extends TestCase
      * @var array<string>
      */
     protected $fixtures = [
-        'app.Dashadm',
+        'app.Restricaos',
+        'app.Teachers',
     ];
 
     /**
      * Test index method
      *
      * @return void
-     * @uses \App\Controller\DashboardController::index()
+     * @uses \App\Controller\Ghif\RestricaosController::index()
      */
     public function testIndex(): void
     {
@@ -40,7 +41,7 @@ class DashboardControllerTest extends TestCase
      * Test view method
      *
      * @return void
-     * @uses \App\Controller\DashboardController::view()
+     * @uses \App\Controller\Ghif\RestricaosController::view()
      */
     public function testView(): void
     {
@@ -51,7 +52,7 @@ class DashboardControllerTest extends TestCase
      * Test add method
      *
      * @return void
-     * @uses \App\Controller\DashboardController::add()
+     * @uses \App\Controller\Ghif\RestricaosController::add()
      */
     public function testAdd(): void
     {
@@ -62,7 +63,7 @@ class DashboardControllerTest extends TestCase
      * Test edit method
      *
      * @return void
-     * @uses \App\Controller\DashboardController::edit()
+     * @uses \App\Controller\Ghif\RestricaosController::edit()
      */
     public function testEdit(): void
     {
@@ -73,7 +74,7 @@ class DashboardControllerTest extends TestCase
      * Test delete method
      *
      * @return void
-     * @uses \App\Controller\DashboardController::delete()
+     * @uses \App\Controller\Ghif\RestricaosController::delete()
      */
     public function testDelete(): void
     {

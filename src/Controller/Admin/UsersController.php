@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use Cake\Event\EventInterface;
 use Cake\ORM\TableRegistry;
 
 class UsersController extends AppController
@@ -116,5 +117,11 @@ class UsersController extends AppController
                 'action' => 'home'
             ]);
         }
+    }
+
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add', 'logout', 'authorize', 'index']);
     }
 }

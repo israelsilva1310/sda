@@ -10,9 +10,11 @@ return static function (RouteBuilder $routes) {
     $routes->scope('/', function (RouteBuilder $builder) {
 
         $builder->connect('/', ['controller' => 'Dashboard', 'action' => 'index']);
+        $builder->connect('/restricao', ['prefix' => 'ghif', 'controller' => 'Gestor']);
         $builder->connect('/cadastrar', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'add']);
         $builder->connect('/login', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'login']);
         $builder->connect('/users', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'index']);
+        $builder->connect('/usuarios', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'index']);
         $builder->connect('/users/login', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'login']);
         $builder->connect('/horarios', ['controller' => 'Schedules', 'action' => 'index']);
         $builder->connect('logout', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'logout']);
@@ -27,7 +29,7 @@ return static function (RouteBuilder $routes) {
     });
 
     $routes->prefix('admin', function (RouteBuilder $builder) {
-        $builder->connect('/', ['controller' => 'Dashboard', 'action' => 'index']);
+        $builder->connect('/', ['controller' => 'Dashadm', 'action' => 'index']);
 
         //$builder->connect('/admin/*', 'index');
         $builder->fallbacks();
@@ -35,6 +37,12 @@ return static function (RouteBuilder $routes) {
     $routes->prefix('tools', function (RouteBuilder $builder) {
         $builder->connect('/', ['controller' => 'Systems', 'action' => 'index']);
         $builder->connect('/ferramentas', ['controller' => 'Systems', 'action' => 'index']);
+
+        $builder->fallbacks();
+    });
+    $routes->prefix('ghif', function (RouteBuilder $builder) {
+        $builder->connect('/', ['controller' => 'Gestor', 'action' => 'index']);
+        $builder->connect('/users/login', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'login']);
 
         $builder->fallbacks();
     });

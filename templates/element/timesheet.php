@@ -7,6 +7,7 @@
 ?>
 <div class="container">
     <div class="row">
+
         <div class="col">
             <select class="form-select" name="selectcursos" id="selectcursos">
                 <option>Selecione</option>
@@ -23,16 +24,17 @@
                 <?php } ?>
             </select>
         </div>
-        <div class="col">
-            <select name="" id=""></select>
-        </div>
+
     </div>
     <script>
-        $(function () {
-            $('#selectcursos').onchange(function () {
-                console.log('1')
-            })
-        })
+        let cursos = document.getElementById('selectcursos')
+        cursos.onchange = function () {
+            let periodo = document.getElementById('selectperiodos')
+            console.log('<option>1</option>')
+        }
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
     </script>
 
     <h1 class="card-header"> Quadro de Horarios </h1>

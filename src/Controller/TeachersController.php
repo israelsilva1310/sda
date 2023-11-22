@@ -41,7 +41,7 @@ class TeachersController extends AppController
     public function view($id = null)
     {
         $teacher = $this->Teachers->get($id, [
-            'contain' => ['Disciplines', 'Disponibilities', 'Turmas'],
+            'contain' => ['Disciplines', 'Turmas'],
         ]);
 
         $this->set(compact('teacher'));
@@ -90,7 +90,7 @@ class TeachersController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $teacher = $this->Teachers->patchEntity($teacher, $this->request->getData());
-            $teacher->acronym ='';
+            $teacher->acronym = '';
             if ($this->Teachers->save($teacher)) {
                 $this->Flash->success(__('The teacher has been saved.'));
 
@@ -120,5 +120,11 @@ class TeachersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function print()
+    {
+        $this->set(compact(['teacher']));
+        $this->disableAutoRender();
     }
 }

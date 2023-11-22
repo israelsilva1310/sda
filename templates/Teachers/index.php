@@ -9,7 +9,7 @@
         <h3><?= __('Professores') ?></h3>
         <div class="btn-group">
             <?= $this->Html->link(__('Adicionar'), ['action' => 'add'], ['class' => 'btn btn-success float-left']) ?>
-            <?= $this->Html->link(__('Imprimir'), ['action' => 'print'], ['class' => 'btn btn-dark float-left']) ?>
+
         </div>
     </div>
     <div class="card-body">

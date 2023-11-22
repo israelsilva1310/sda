@@ -29,7 +29,7 @@
             '<i
                 class="fas fa-user-graduate fa-sm text-white-50"></i> Horarios Professores',
             [
-                'controller' => 'Dashboard',
+                'controller' => 'Dashadm',
                 'action' => 'hoursTeachers',
                 '_full' => true],
             [
