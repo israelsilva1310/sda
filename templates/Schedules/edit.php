@@ -34,11 +34,13 @@
                 'options' => $disciplines,
                 'empty' => true,
                 'class' => 'form-select col-3']) ?>
+
             <?= $this->Form->control('day', [
-                'options' => ['segunda', 'terca', 'quarta', 'quinta', 'sexta'],
+                'options' => $diasemanas,
                 'empty' => true,
                 'class' => 'form-select col-3',
                 'label' => 'Dia']) ?>
+
             <?= $this->Form->control('hour', [
                 'options' => $horaaulas,
                 'empty' => true,

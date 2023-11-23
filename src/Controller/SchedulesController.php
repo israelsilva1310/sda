@@ -7,6 +7,9 @@ use Cake\ORM\TableRegistry;
 
 class SchedulesController extends AppController
 {
+    /**
+     * @return void
+     */
     public function index()
     {
         $this->paginate = [
@@ -14,7 +17,6 @@ class SchedulesController extends AppController
         ];
         $schedules = $this->paginate($this->Schedules);
         $diasemanas = [
-            'Horario',
             'Segunda',
             'Terça',
             'Quarta',
@@ -41,13 +43,18 @@ class SchedulesController extends AppController
             '12' => '20:50',
             '13' => '21:40',
         ];
-
         $courses = TableRegistry::getTableLocator()
             ->get('Courses')
-            ->find('list');
+            ->find('all');
         $periodos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-
+//        foreach ($schedules as $schedule) {
+//            if ($schedule->day === '3') {
+//                var_dump($schedule->day);
+//                var_dump($schedule->teacher->first_name);
+//                var_dump($schedule->course->name);
+//            }
+//        }
         $this->set(compact(['schedules', 'horaaulas', 'diasemanas', 'courses', 'periodos']));
     }
 
@@ -57,11 +64,11 @@ class SchedulesController extends AppController
         if ($this->request->is('post')) {
             $schedule = $this->Schedules->patchEntity($schedule, $this->request->getData());
             if ($this->Schedules->save($schedule)) {
-                $this->Flash->success(__('The schedule has been saved.'));
+                $this->Flash->success(__('Registro salvo.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The schedule could not be saved. Please, try again.'));
+            $this->Flash->error(__('Nãofoi possivel adicionar o registro!'));
         }
         $horaaulas = [
             '1' => '07:00',
@@ -112,13 +119,13 @@ class SchedulesController extends AppController
             }
             $this->Flash->error(__('Horario, salvo.'));
         }
-//        $diasemanas = [
-//            'Segunda',
-//            'Terça',
-//            'Quarta',
-//            'Quinta',
-//            'Sexta',
-//        ];
+        $diasemanas = [
+            'segunda' => 'segunda',
+            'terça' => 'terca',
+            'quarta' => 'quarta',
+            'quinta' => 'quinta',
+            'sexta' => 'sexta',
+        ];
         $horaaulas = [
             '1' => '07:00',
             '2' => '07:50',
@@ -143,7 +150,7 @@ class SchedulesController extends AppController
         $courses = $this->Schedules->Courses->find('list', ['limit' => 200])->all();
         $teachers = $this->Schedules->Teachers->find('list', ['limit' => 200])->all();
         $disciplines = $this->Schedules->Disciplines->find('list', ['limit' => 200])->all();
-        $this->set(compact('schedule', 'courses', 'teachers', 'disciplines', 'horaaulas'));
+        $this->set(compact('schedule', 'courses', 'teachers', 'disciplines', 'horaaulas','diasemanas'));
     }
 
     /**

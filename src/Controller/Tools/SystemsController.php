@@ -7,6 +7,11 @@ use App\Controller\AppController;
 
 class SystemsController extends AppController
 {
+    public function index()
+    {
+
+    }
+
     public function tools()
     {
     }

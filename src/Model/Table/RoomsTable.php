@@ -44,6 +44,10 @@ class RoomsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->hasMany('Disciplines', [
+            'foreignKey' => 'room_id',
+        ]);
     }
 
     /**

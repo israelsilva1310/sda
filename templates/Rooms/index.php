@@ -5,23 +5,23 @@
  */
 ?>
 <div class="rooms index content">
-    <?= $this->Html->link(__('New Room'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Rooms') ?></h3>
+    <?= $this->Html->link(__('Adicionar'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <h3><?= __('Salas e Labs') ?></h3>
     <div class="table-responsive">
         <table>
             <thead>
-                <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('location') ?></th>
-                    <th><?= $this->Paginator->sort('name') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th><?= $this->Paginator->sort('active') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
-                </tr>
+            <tr>
+                <th><?= $this->Paginator->sort('id') ?></th>
+                <th><?= $this->Paginator->sort('location') ?></th>
+                <th><?= $this->Paginator->sort('name') ?></th>
+                <th><?= $this->Paginator->sort('created') ?></th>
+                <th><?= $this->Paginator->sort('modified') ?></th>
+                <th><?= $this->Paginator->sort('active') ?></th>
+                <th class="actions"><?= __('Actions') ?></th>
+            </tr>
             </thead>
             <tbody>
-                <?php foreach ($rooms as $room): ?>
+            <?php foreach ($rooms as $room): ?>
                 <tr>
                     <td><?= $this->Number->format($room->id) ?></td>
                     <td><?= h($room->location) ?></td>
@@ -35,7 +35,7 @@
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $room->id], ['confirm' => __('Are you sure you want to delete # {0}?', $room->id)]) ?>
                     </td>
                 </tr>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>

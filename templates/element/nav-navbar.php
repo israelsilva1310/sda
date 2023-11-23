@@ -40,10 +40,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item subtitulo-menu"
-                                   href="./ferramentas" target="_parent"> Ferramentas</a></li>
-                            <li><a class="dropdown-item subtitulo-menu"
-                                   href="/transparencia/9/relatorios-procon-anterior-a-maio2021">Relatórios Procon -
-                                    anterior a maio/2021</a></li>
+                                   href="./tools" target="_parent"> Ferramentas</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

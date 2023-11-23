@@ -30,6 +30,7 @@
             <table class="table table-striped table-hover table-sm">
                 <thead class="">
                 <tr class="">
+                    <th><?= $this->Paginator->sort('id', ['label' => 'ID']) ?></th>
                     <th><?= $this->Paginator->sort('course_id', ['label' => 'CURSO']) ?></th>
                     <th><?= $this->Paginator->sort('period', ['label' => 'PERIODO']) ?></th>
                     <th><?= $this->Paginator->sort('teacher_id', ['label' => 'PROFESSOR']) ?></th>
@@ -43,6 +44,7 @@
                 <?php foreach ($schedules as $schedule): ?>
                     <tr>
 
+                        <td><?= h($schedule->id) ?></td>
                         <td><?= $schedule->has('course') ? $this->Html->link($schedule->course->name, ['controller' => 'Courses', 'action' => 'view', $schedule->course->id]) : '' ?></td>
                         <td><?= $schedule->period === null ? '' : $this->Number->format($schedule->period) ?></td>
                         <td><?= $schedule->has('teacher') ? $this->Html->link($schedule->teacher->first_name, ['controller' => 'Teachers', 'action' => 'view', $schedule->teacher->id]) : '' ?></td>

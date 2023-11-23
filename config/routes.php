@@ -30,6 +30,7 @@ return static function (RouteBuilder $routes) {
 
     $routes->prefix('admin', function (RouteBuilder $builder) {
         $builder->connect('/', ['controller' => 'Dashadm', 'action' => 'index']);
+        $builder->connect('/admin/dashboard', ['controller' => 'Dashadm', 'action' => 'index']);
 
         //$builder->connect('/admin/*', 'index');
         $builder->fallbacks();
