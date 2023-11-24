@@ -26,41 +26,55 @@
     <h1 class="card-header"> Quadro de Horarios </h1>
 
     <div class="card-body">
-        <?php foreach ($horaaulas as $horaula) { ?>
-            <?php foreach ($courses as $course) { ?>
-                <h2><?= $course->name ?></h2>
-                <?php foreach ($schedules as $schedule) { ?>
-                    <?php if ($schedule->course->id = $course->id) { ?>
 
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">Horario</th>
-                                <?php foreach ($diasemanas as $semana) { ?>
-                                    <th scope="col"><?= $semana ?></th>
-                                <?php } ?>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><?= $schedule->hour ?></td>
-                                <?php if ($schedule->discipline->course_id = $schedule->course->id) { ?>
-                                    <?php if ($schedule->day = $semana) { ?>
-                                        <td><?= $schedule->discipline->name ?></td>
+        <?php foreach ($courses
+
+        as $course) { ?>
+        <h3><?= $course->name ?></h3>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+
+            <?php foreach ($diasemanas as $semana) { ?>
+                <th scope="col">
+                    <h3><?= $semana ?></h3>
+                </th>
+
+                <?php foreach ($horaaulas as $horaula) { ?>
+                    <h3><?= $horaula ?></h3>
+
+                    <?php foreach ($schedules as $schedule) { ?>
+                        <?php if ($schedule->day == $semana) { ?>
+                            <?php if ($schedule->hour == $horaula) { ?>
+
+                                <?php if ($schedule->course->id = $course->id) { ?>
+                                    <?php if ($schedule->discipline->course_id = $schedule->course->id) { ?>
+                                        <table class="table table-striped">
+                                            <thead class="thead-dark">
+
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <?= $schedule->discipline->name ?>
+
+                                                    <?= $schedule->teacher->first_name ?>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+
+                                        </table>
 
                                     <?php } ?>
                                 <?php } ?>
+                            <?php } ?>
+                        <?php } ?>
 
-                            </tr>
-
-                            </tbody>
-                        </table>
                     <?php } ?>
                 <?php } ?>
             <?php } ?>
-        <?php } ?>
-        <div class="card-footer">
+            <?php } ?>
+            <div class="card-footer">
 
-        </div>
+            </div>
     </div>
 </div>

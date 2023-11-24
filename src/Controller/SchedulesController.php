@@ -17,11 +17,12 @@ class SchedulesController extends AppController
         ];
         $schedules = $this->paginate($this->Schedules);
         $diasemanas = [
-            'Segunda',
-            'Terça',
-            'Quarta',
-            'Quinta',
-            'Sexta',
+            'Horario',
+            'segunda',
+            'terça',
+            'quarta',
+            'quinta',
+            'sexta',
         ];
         $horaaulas = [
             '1' => '07:00',
@@ -150,7 +151,7 @@ class SchedulesController extends AppController
         $courses = $this->Schedules->Courses->find('list', ['limit' => 200])->all();
         $teachers = $this->Schedules->Teachers->find('list', ['limit' => 200])->all();
         $disciplines = $this->Schedules->Disciplines->find('list', ['limit' => 200])->all();
-        $this->set(compact('schedule', 'courses', 'teachers', 'disciplines', 'horaaulas','diasemanas'));
+        $this->set(compact('schedule', 'courses', 'teachers', 'disciplines', 'horaaulas', 'diasemanas'));
     }
 
     /**
