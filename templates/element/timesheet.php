@@ -8,28 +8,20 @@
     <br>
     <div class="row">
         <div class="col">
-            <select class="disciplinas" name="disciplinas">
-                <option value="AL">Alabama</option>
-                ...
-                <option value="WY">Wyoming</option>
-            </select>
-
-            <select class="form-select" name="selectCursos" id="selectCursos">
+            <select class="selectCursos" name="selectCursos" id="selectCursos">
                 <option>Selecione</option>
                 <?php foreach ($courses as $curso) { ?>
                     <option><?= $curso->name ?></option>
                 <?php } ?>
             </select>
-        </div>
-        <div class="col">
-            <?= $this->Form->submit('carregar', [
-                'class' => 'btn btn-warning',
-                'id' => 'btnCarregar',
-                'name' => 'btnCarregar',
-            ]) ?>
+
         </div>
     </div>
-    <h1 class="card-header"> Quadro de Horarios </h1>
+    <div>
+        <!--        aqui vai apresentar os dados que foram selecionado no select via JS.-->
+        <h1 class="card-header"> Quadro de Horarios </h1>
+
+    </div>
 
     <div class="card-body">
 

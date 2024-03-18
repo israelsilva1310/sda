@@ -3,18 +3,13 @@
  * git: https://github.com/israelsilva1310
  * HomePage: https://israelcasilva.com.br
  **/
-// let cursos = document.getElementById('selectcursos')
-// let quadroHorarios = document.getElementById('quadroHorarios')
-// cursos.onchange = function () {
-//     let periodos = document.getElementById('selectperiodos')
-//     fetch('periodos')
-//         .then(response => {
-//             return response.text();
-//         })
-//         .then(texto => {
-//             console.log(texto)
-//         });
-// }
 
-// In your Javascript (external .js resource or <script> tag)
+window.addEventListener('load', () => {
+    var cursos = document.querySelector('#selectCursos');
+    var periodos = document.querySelector('#selectPeriodo');
 
+    cursos.onchange = function () {
+        var cursoSelecionado = this.value;
+        console.log(cursoSelecionado)
+    }
+});
