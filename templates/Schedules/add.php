@@ -40,11 +40,14 @@
             'empty' => true,
         ]) ?>
         <?= $this->Form->control('discipline_id', [
+            'label' => 'Disciplina',
             'options' => $disciplines,
             'class' => 'form-select col-4',
             'empty' => true,
-        ]) ?>
+        ]); ?>
+
         <?= $this->Form->control('day', [
+            'label' => 'Dia',
             'options' => ['segunda', 'terca', 'quarta', 'quinta', 'sexta'],
             'class' => 'form-select col-2',
             'empty' => true,
@@ -57,13 +60,9 @@
         ]) ?>
 </div>
 </fieldset>
-<?= $this->Form->button(__('Salvar'), [
-    'class' => 'btn btn-success btn-sm',
-]) ?>
+<?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-success btn-sm',]) ?>
 
-<?= $this->Html->link(__('Voltar'), [
-    'action' => 'index'], [
-    'class' => 'btn btn-danger btn-sm side-nav-item']) ?>
+<?= $this->Html->link(__('Voltar'), ['action' => 'index'], ['class' => 'btn btn-danger btn-sm side-nav-item']) ?>
 <?= $this->Form->end() ?>
 </div>
 </div>

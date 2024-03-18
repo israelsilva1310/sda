@@ -26,21 +26,8 @@ class AppController extends Controller
                     'fields' => [
                         'username' => 'email',
                         'password' => 'password'
-                    ]
-                ]
-            ],
-            'loginAction' => [
-                'controller' => 'Users',
-                'action' => 'login'
-            ],
-            'logoutAction' => [
-                'prefix' => 'Admin',
-                'controller' => 'Users',
-                'action' => 'login'
-            ],
-            'loginRedirect' => [
-                'controller' => 'Dashadm',
-                'action' => 'index'
+
+                    ]]
             ]
         ]);
 // Permite a ação display, assim nosso pages controller
@@ -65,11 +52,11 @@ class AppController extends Controller
 
                 $this->viewBuilder()->setTheme('login');
             } else {
-                //$this->viewBuilder()->setLayout('sda');
-                //$id = null;
+                $this->viewBuilder()->setLayout('sda');
+                $id = null;
                 $perfilUser = $this->Auth->user();
                 $this->set(compact(['perfilUser']));
-                //var_dump($perfilUser);
+                var_dump($perfilUser);
             }
         }
     }

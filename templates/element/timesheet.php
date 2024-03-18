@@ -8,6 +8,12 @@
     <br>
     <div class="row">
         <div class="col">
+            <select class="disciplinas" name="disciplinas">
+                <option value="AL">Alabama</option>
+                ...
+                <option value="WY">Wyoming</option>
+            </select>
+
             <select class="form-select" name="selectCursos" id="selectCursos">
                 <option>Selecione</option>
                 <?php foreach ($courses as $curso) { ?>
@@ -78,3 +84,4 @@
             </div>
     </div>
 </div>
+

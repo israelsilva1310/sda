@@ -69,7 +69,7 @@ class SchedulesController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Nãofoi possivel adicionar o registro!'));
+            $this->Flash->error(__('Não foi possivel adicionar o registro!'));
         }
         $horaaulas = [
             '1' => '07:00',

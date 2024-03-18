@@ -14,16 +14,15 @@ $cakeDescription = 'SDA';
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
     <?= $this->Html->css([
+        'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css',
+        'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
         'adminlte.min',
         'estilo',
         'bootstrap.min',
         'fontawesome.min',
-        'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css',
         'contraste',
         'dashboard'
     ]) ?>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
@@ -43,13 +42,9 @@ $cakeDescription = 'SDA';
 <?= $this->element('footer') ?>
 <?= $this->Html->script([
     'funcoes',
-    'adminlte.min',
-    'estilo',
-    'dashboard',
-    'jquery-3.7.0.min',
-    'bootstrap.bundle.min',
-    'bootstrap.min',
-    'popper.min',
+    'https://code.jquery.com/jquery-3.7.1.min.js',
+    'https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js',
+    'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
 ]) ?>
 </body>
 </html>

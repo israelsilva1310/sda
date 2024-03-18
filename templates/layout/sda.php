@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <title><?= h($this->fetch('title')) ?></title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
     <?= $this->Html->css([
         'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
         'style',
@@ -39,7 +39,7 @@
             'logo-ifsmg.jfif',
             [
                 'class' => 'logo',
-                'alt' => 'AdminLTE Logo',
+                'alt' => 'IFLogo',
                 'height' => 'auto',
                 'width' => '100%',
             ],
@@ -120,22 +120,7 @@
 
 <!-- Select2 JS -->
 <?= $this->Html->script([
-    'base',
-    'adminlte.min',
-    '/vendor/bootstrap/js/bootstrap.bundle.min',
-    '/vendor/jquery-ui/jquery-ui.min',
-    '/vendor/chart.js/Chart.min',
-    '/vendor/sparklines/sparkline',
-    '/vendor/daterangepicker/daterangepicker',
-    '/vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min',
-    '/vendor/summernote/summernote-bs4.min',
-    '/vendor/overlayScrollbars/js/jquery.overlayScrollbars.min',
-    'popper.min',
-    'bootstrap.min',
-    'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
-    'https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js',
-    'https://code.jquery.com/jquery-3.6.0.js',
-    'https://code.jquery.com/ui/1.13.2/jquery-ui.js',
+
 ]) ?>
 </body>
 </html>

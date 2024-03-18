@@ -16,21 +16,25 @@
 
     Contrast.check();
 
-    function checkContrast() {
+    function checkContrast()
+    {
         this.updateView();
     }
 
-    function getContrastState() {
+    function getContrastState()
+    {
         return localStorage.getItem(this.storage) === 'true';
     }
 
-    function setContrastState(state) {
+    function setContrastState(state)
+    {
         localStorage.setItem(this.storage, '' + state);
         this.currentState = state;
         this.updateView();
     }
 
-    function updateViewContrast() {
+    function updateViewContrast()
+    {
         let body = document.body;
 
         if (this.currentState === null) {
@@ -44,7 +48,8 @@
         }
     }
 
-    function toogleContrast() {
+    function toogleContrast()
+    {
         this.setState(!this.currentState);
     }
 
