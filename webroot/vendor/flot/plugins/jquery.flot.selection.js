@@ -128,7 +128,7 @@ The plugin allso adds the following methods to the plot object:
             // cancel out any text selections
             document.body.focus();
 
-            // prevent text selection and drag in old-school browsers
+            // prevent text selection and drag in old-School browsers
             if (document.onselectstart !== undefined && savedhandlers.onselectstart == null) {
                 savedhandlers.onselectstart = document.onselectstart;
                 document.onselectstart = function () { return false; };
@@ -144,7 +144,7 @@ The plugin allso adds the following methods to the plot object:
         }
 
         function onDragEnd(e) {
-            // revert drag stuff for old-school browsers
+            // revert drag stuff for old-School browsers
             if (document.onselectstart !== undefined) {
                 document.onselectstart = savedhandlers.onselectstart;
             }

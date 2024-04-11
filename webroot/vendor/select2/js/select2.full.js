@@ -6622,7 +6622,7 @@ S2.define('select2/selection/stopPropagation',[
         event = $.event.fix(orgEvent);
         event.type = 'mousewheel';
 
-        // Old school scrollwheel delta
+        // Old School scrollwheel delta
         if ( 'detail'      in orgEvent ) { deltaY = orgEvent.detail * -1;      }
         if ( 'wheelDelta'  in orgEvent ) { deltaY = orgEvent.wheelDelta;       }
         if ( 'wheelDeltaY' in orgEvent ) { deltaY = orgEvent.wheelDeltaY;      }
@@ -6637,7 +6637,7 @@ S2.define('select2/selection/stopPropagation',[
         // Set delta to be deltaY or deltaX if deltaY is 0 for backwards compatabilitiy
         delta = deltaY === 0 ? deltaX : deltaY;
 
-        // New school wheel delta (wheel event)
+        // New School wheel delta (wheel event)
         if ( 'deltaY' in orgEvent ) {
             deltaY = orgEvent.deltaY * -1;
             delta  = deltaY;

@@ -49,8 +49,8 @@ return static function (RouteBuilder $routes) {
 
         $builder->fallbacks();
     });
-    $routes->prefix('ghif', function (RouteBuilder $builder) {
-        $builder->connect('/', ['controller' => 'Gestor', 'action' => 'index']);
+    $routes->prefix('School', function (RouteBuilder $builder) {
+        $builder->connect('/', ['controller' => 'Welcome', 'action' => 'index']);
         $builder->connect('/users/login', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'login']);
 
         $builder->fallbacks();
