@@ -9,6 +9,7 @@
         <h3><?= __('Professores') ?></h3>
         <div class="btn-group">
             <?= $this->Html->link(__('Adicionar'), ['action' => 'add'], ['class' => 'btn btn-success float-left']) ?>
+            <?= $this->Html->link(__(' Gerar Lista'), ['action' => 'print'], ['class' => 'btn btn-dark float-rigth']) ?>
 
         </div>
     </div>
@@ -49,13 +50,17 @@
 
                         <?= $this->Html->link(__('Edit'), [
                             'action' => 'edit', $teacher->id], [
-                            'class' => 'btn btn-primary btn-sm'
-                        ]) ?>
+                            'class' => 'btn btn-primary btn-sm']) ?>
 
                         <?= $this->Form->postLink(__('Delete'), [
                             'action' => 'delete', $teacher->id], [
                             'class' => 'btn btn-danger btn-sm',
                             'confirm' => __('Are you sure you want to delete # {0}?', $teacher->id)]) ?>
+
+                        <?= $this->Html->link(__('PDF  '), [
+                            'action' => 'print', $teacher->id], [
+                            'class' => 'btn btn-dark btn-sm'
+                        ]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -64,16 +69,13 @@
     </div>
     <div class="card-footer">
 
-            <ul class="pagination">
-                <?= $this->Paginator->first('<< ' . __('first')) ?>
-                <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                <?= $this->Paginator->numbers() ?>
-                <?= $this->Paginator->next(__('next') . ' >') ?>
-                <?= $this->Paginator->last(__('last') . ' >>') ?>
-            </ul>
-            <p><?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, exibindo {{current}} registro(s) de {{count}} total')) ?></p>
-        </div>
+        <ul class="pagination">
+            <?= $this->Paginator->first('<< ' . __('first')) ?>
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->last(__('last') . ' >>') ?>
+        </ul>
+        <p><?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, exibindo {{current}} registro(s) de {{count}} total')) ?></p>
     </div>
-
-
 </div>

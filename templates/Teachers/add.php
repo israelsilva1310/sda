@@ -15,12 +15,14 @@
                     <?= $this->Form->control('last_name', ['class' => 'form-control']) ?>
                     <?= $this->Form->control('acronym', ['class' => 'form-control']) ?>
                     <?= $this->Form->control('user_id', ['type' => 'hidden', 'class' => 'form-control']) ?>
-                    <?= $this->Form->control('discipline_id', ['options' => $disciplines, 'empty' => true, 'class' => 'form-control']) ?>
+                    <?php foreach ($disciplines as $discipline) { ?>
+                        <?= $this->Form->checkbox('discipline[]', ['value' => $discipline['id'], 'label' => $discipline['name'], ['class' => 'form-check']]) ?>
+                    <?php } ?>
+
                     <?= $this->Form->control('email', ['class' => 'form-control']) ?>
                     <?= $this->Form->control('title', ['class' => 'form-control']) ?>
                     <?= $this->Form->control('phone', ['class' => 'form-control']) ?>
                     <?= $this->Form->control('active', ['class' => 'form-check']) ?>
-
 
 
                 </div>

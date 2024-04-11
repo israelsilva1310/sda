@@ -8,13 +8,5 @@
       <jdbc-url>jdbc:mysql://localhost:3306/tcc</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="GCP-israelcasilva.com.br" uuid="1a8c387f-72e0-4587-81d3-ab9446b34fd5">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <remarks>34.125.247.244</remarks>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/tcc</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
   </component>
 </project>

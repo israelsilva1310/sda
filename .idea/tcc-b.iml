@@ -116,6 +116,13 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/mpdf/psr-http-message-shim" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/almasaeed2010/adminlte" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/sql-formatter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/endroid/qr-code" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/fpdf/fpdf" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/iandenh/cakephp-sendgrid" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jarouche/viacep" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sendgrid/php-http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sendgrid/sendgrid" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/starkbank/ecdsa" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

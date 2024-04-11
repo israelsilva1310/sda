@@ -7,6 +7,8 @@ use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
+use Cake\ORM\TableRegistry;
+use Mpdf\Mpdf;
 
 /**
  * Teachers Controller
@@ -58,7 +60,7 @@ class TeachersController extends AppController
         $teacher = $this->Teachers->newEmptyEntity();
         $teacher->qrcode = 'teste';
         $teacher->created_at = date("Y-m-d H:i:s");
-
+        //$disciplines = TableRegistry::getTableLocator()->get()->find();
         //var_dump($teacher);
 
         if ($this->request->is('post', 'put')) {
@@ -71,8 +73,8 @@ class TeachersController extends AppController
             $this->Flash->error(__('Não foi possivel salvar, Tente novamente.'));
         }
 
-        $disciplines = $this->Teachers->Disciplines->find('list', ['limit' => 200])->all();
-
+        $disciplines = $this->Teachers->Disciplines->find()->all();
+      //  var_dump($disciplines);
         $this->set(compact('teacher', 'disciplines'));
     }
 
@@ -122,9 +124,20 @@ class TeachersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function print()
+    public function print($id)
     {
-        $this->set(compact(['teacher']));
+        $professores = $this->Teachers->find()->all();
+
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [190, 236], 'orientation' => 'L']);
+
+        $html = $id;
+
+        $mpdf->WriteHTML($html);
+
+        $mpdf->OutputHttpDownload('Lista_Professores.pdf');
+
+        $this->set(compact(['professores']));
+
         $this->disableAutoRender();
     }
 }

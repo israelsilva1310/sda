@@ -9,7 +9,7 @@ return static function (RouteBuilder $routes) {
 
     $routes->scope('/', function (RouteBuilder $builder) {
 
-        $builder->connect('/', ['controller' => 'Dashboard', 'action' => 'index']);
+        $builder->connect('/', ['controller' => 'Welcome', 'action' => 'index']);
         $builder->connect('/restricao', ['prefix' => 'ghif', 'controller' => 'Gestor']);
         $builder->connect('/cadastrar', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'add']);
         $builder->connect('/login', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'login']);
@@ -17,8 +17,12 @@ return static function (RouteBuilder $routes) {
         $builder->connect('/usuarios', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'index']);
         $builder->connect('/users/login', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'login']);
         $builder->connect('/horarios', ['controller' => 'Schedules', 'action' => 'index']);
+        $builder->connect('/horarios/add', ['controller' => 'Schedules', 'action' => 'add']);
         $builder->connect('logout', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'logout']);
+
         $builder->connect('/professores', ['controller' => 'Teachers', 'action' => 'index']);
+        $builder->connect('/professores/gerarpdf', ['controller' => 'Teachers', 'action' => 'print']);
+
         $builder->connect('/disciplinas', ['controller' => 'Disciplines', 'action' => 'index']);
         $builder->connect('/salas', ['controller' => 'Rooms', 'action' => 'index']);
         $builder->connect('/cursos', ['controller' => 'Courses', 'action' => 'index']);
@@ -30,7 +34,11 @@ return static function (RouteBuilder $routes) {
 
     $routes->prefix('admin', function (RouteBuilder $builder) {
         $builder->connect('/', ['controller' => 'Dashadm', 'action' => 'index']);
-        $builder->connect('/admin/dashboard', ['controller' => 'Dashadm', 'action' => 'index']);
+        $builder->connect('/dashboard', ['controller' => 'Dashadm', 'action' => 'index']);
+        $builder->connect('/modulos', ['controller' => 'Modules', 'action' => 'index']);
+        $builder->connect('/horarios', ['prefix' => false, 'controller' => 'Schedules', 'action' => 'index']);
+        $builder->connect('/configs', ['controller' => 'configurations', 'action' => 'edit', 1]);
+        $builder->connect('/parametros', ['controller' => 'configurations', 'action' => 'parameters', 1]);
 
         //$builder->connect('/admin/*', 'index');
         $builder->fallbacks();

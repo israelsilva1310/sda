@@ -26,7 +26,6 @@ class AppController extends Controller
                     'fields' => [
                         'username' => 'email',
                         'password' => 'password'
-
                     ]]
             ]
         ]);
@@ -48,15 +47,16 @@ class AppController extends Controller
                     ($this->request->getParam(['action']) == 'login') or (
                         $this->request->getParam(['action']) == 'cadastrar') or (
                         $this->request->getParam(['action']) == 'recuperarSenha') or (
-                        $this->request->getParam(['action']) == 'atualizarSenha'))) {
-
+                        $this->request->getParam(['action']) == 'atualizarSenha')
+                )
+            ) {
                 $this->viewBuilder()->setTheme('login');
             } else {
                 $this->viewBuilder()->setLayout('sda');
                 $id = null;
                 $perfilUser = $this->Auth->user();
                 $this->set(compact(['perfilUser']));
-                var_dump($perfilUser);
+                //  var_dump($perfilUser);
             }
         }
     }
